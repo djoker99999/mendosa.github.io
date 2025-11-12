@@ -1009,6 +1009,7 @@
       backdrop-filter: blur(10px);
       transform: scale(0.7);
       transition: transform 0.5s ease;
+      position: relative;
     }
 
     .jackpot-winner.active .jackpot-winner-content {
@@ -1056,9 +1057,138 @@
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
       background: linear-gradient(45deg, #FFA500, #FF8C00);
     }
+
+    /* Menu en bas à droite */
+    .menu-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #ff6b9d, #c44569);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      z-index: 100;
+      transition: all 0.3s ease;
+      font-size: 24px;
+    }
+
+    .menu-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .menu-panel {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 250px;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 15px;
+      padding: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .menu-panel.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .menu-title {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+      color: #ff8c00;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 8px;
+    }
+
+    .menu-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .menu-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-input-group label {
+      font-size: 0.9em;
+      color: #ffffff;
+      text-align: left;
+    }
+
+    .menu-input {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 0.9em;
+    }
+
+    .menu-input:focus {
+      outline: none;
+      border-color: #ff8c00;
+    }
+
+    .menu-btn {
+      padding: 8px 15px;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(45deg, #ff6b9d, #c44569);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9em;
+    }
+
+    .menu-btn:hover {
+      background: linear-gradient(45deg, #ff8c00, #ff6b9d);
+      transform: translateY(-2px);
+    }
+
+    .menu-btn.jackpot {
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      color: #000;
+    }
+
+    .menu-btn.jackpot:hover {
+      background: linear-gradient(45deg, #FFA500, #FF8C00);
+    }
   </style>
 </head>
 <body>
+  <!-- Menu en bas à droite -->
+  <div class="menu-button" id="menuButton">⚙️</div>
+  <div class="menu-panel" id="menuPanel">
+    <div class="menu-title">Contrôles du Jackpot</div>
+    <div class="menu-controls">
+      <div class="menu-input-group">
+        <label for="jackpotValue">Valeur du Jackpot :</label>
+        <input type="number" id="jackpotValue" class="menu-input" value="1000" min="100" max="1000000">
+      </div>
+      <button class="menu-btn" id="updateJackpotBtn">Modifier le Jackpot</button>
+      <button class="menu-btn jackpot" id="triggerJackpotBtn">Déclencher le Jackpot</button>
+    </div>
+  </div>
+
   <!-- Tableau des derniers gains (déplaçable) -->
   <div class="winners-table" id="winnersTable">
     <div class="winners-title">🎰 Derniers Jackpots 🎰</div>
@@ -1207,6 +1337,13 @@
     // Éléments du tableau des gains
     const winnersTable = document.getElementById("winnersTable");
     const winnersList = document.getElementById("winnersList");
+    
+    // Éléments du menu
+    const menuButton = document.getElementById("menuButton");
+    const menuPanel = document.getElementById("menuPanel");
+    const jackpotValueInput = document.getElementById("jackpotValue");
+    const updateJackpotBtn = document.getElementById("updateJackpotBtn");
+    const triggerJackpotBtn = document.getElementById("triggerJackpotBtn");
 
     const impactEffects = ["💥", "🔥", "⭐", "💫", "✨", "💢"];
 
@@ -1431,6 +1568,7 @@
     function updateJackpot() {
       jackpotAmountElement.textContent = jackpotAmount.toLocaleString() + " 🌹";
       jackpotProgressBar.style.width = jackpotProgress + "%";
+      jackpotValueInput.value = jackpotAmount;
     }
 
     // Fonction pour mettre à jour le tableau des gains
@@ -1854,6 +1992,25 @@
       }
     }
 
+    // Fonction pour modifier la valeur du jackpot
+    function updateJackpotValue() {
+      const newValue = parseInt(jackpotValueInput.value);
+      if (!isNaN(newValue) && newValue >= 100 && newValue <= 1000000) {
+        jackpotAmount = newValue;
+        updateJackpot();
+        saveGameState();
+        alert(`Valeur du jackpot modifiée à ${newValue} 🌹`);
+      } else {
+        alert("Veuillez entrer une valeur valide entre 100 et 1 000 000");
+      }
+    }
+
+    // Fonction pour déclencher le jackpot manuellement
+    function triggerJackpot() {
+      jackpotHitsCounter = 100;
+      checkJackpot();
+    }
+
     // Événements CORRIGÉS
     document.getElementById("attackBtn").addEventListener("click", attack);
     document.getElementById("resetBtn").addEventListener("click", initGame);
@@ -1888,6 +2045,22 @@
         closeJackpotPopup();
       }
     });
+
+    // Gestion du menu
+    menuButton.addEventListener('click', function() {
+      menuPanel.classList.toggle('active');
+    });
+
+    // Fermer le menu en cliquant en dehors
+    document.addEventListener('click', function(e) {
+      if (!menuPanel.contains(e.target) && !menuButton.contains(e.target)) {
+        menuPanel.classList.remove('active');
+      }
+    });
+
+    // Contrôles du jackpot dans le menu
+    updateJackpotBtn.addEventListener('click', updateJackpotValue);
+    triggerJackpotBtn.addEventListener('click', triggerJackpot);
 
     // Raccourcis clavier
     document.addEventListener('keydown', (e) => {
@@ -1944,6 +2117,7 @@
         case 'Escape':
           closeVictoryPopup();
           closeJackpotPopup();
+          menuPanel.classList.remove('active');
           break;
       }
     });
