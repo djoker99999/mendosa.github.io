@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎰 Jackpot des Symboles Mystères</title>
+  <title>🎮 Casse la Brique Magique de Mario</title>
   <style>
-    /* Styles CSS inchangés */
     * {
       margin: 0;
       padding: 0;
@@ -13,39 +12,51 @@
     }
 
     body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://img.freepik.com/vecteurs-libre/fond-jeu-video-dessine-main_23-2150307800.jpg?semt=ais_hybrid&w=740&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #ffffff;
       text-align: center;
       min-height: 100vh;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 10px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Overlay pour améliorer la lisibilité */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
     }
 
     .game-container {
-      max-width: 900px;
+      max-width: 500px;
       width: 100%;
+      margin: 0 auto;
       background: rgba(0, 0, 0, 0.7);
       border-radius: 20px;
-      padding: 30px;
+      padding: 20px;
       backdrop-filter: blur(10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
-      border: 3px solid rgba(255, 215, 0, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       position: relative;
-      overflow: hidden;
+      border: 2px solid rgba(255, 165, 0, 0.3);
     }
 
     .game-container::before {
       content: '';
       position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
-      background: linear-gradient(45deg, #ffd700, #ff6b9d, #c44569, #ffd700);
-      border-radius: 25px;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #ff8c00, #ff6b9d, #c44569, #ff8c00);
+      border-radius: 22px;
       z-index: -1;
       animation: borderGlow 3s linear infinite;
     }
@@ -56,2401 +67,1904 @@
     }
 
     h1 {
-      font-size: 2.8em;
+      font-size: 2.2em;
       margin-bottom: 15px;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-      background: linear-gradient(45deg, #ff6b9d, #feca57);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      color: #ffffff;
     }
 
-    .jackpot-display {
-      background: linear-gradient(45deg, #e74c3c, #c0392b);
+    .instructions {
+      margin: 20px 0;
       padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 15px;
-      margin: 15px 0;
-      border: 3px solid gold;
-      animation: jackpotPulse 2s infinite;
-      box-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+      backdrop-filter: blur(10px);
     }
 
-    @keyframes jackpotPulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(231, 76, 60, 0.5); }
-      50% { transform: scale(1.02); box-shadow: 0 0 30px rgba(231, 76, 60, 0.8); }
+    .instructions h2 {
+      font-size: 1.5em;
+      margin-bottom: 8px;
+      color: #ffffff;
     }
 
-    .jackpot-amount {
-      font-size: 2.5em;
+    .instructions p {
+      font-size: 1.1em;
       font-weight: bold;
-      color: gold;
-      text-shadow: 0 0 10px rgba(0,0,0,0.8);
+      color: #ffffff;
     }
 
-    .jackpot-label {
-      font-size: 1.2em;
-      color: white;
-      margin-bottom: 5px;
-    }
-
-    .lock-container {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin: 30px 0;
-      perspective: 1000px;
-      flex-wrap: wrap;
-    }
-
-    .symbol-wheel {
-      width: 80px;
-      height: 120px;
-      background: linear-gradient(145deg, #2c3e50, #34495e);
-      border-radius: 10px;
+    .brick-container {
+      position: relative;
+      margin: 20px auto;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 3em;
-      font-weight: bold;
-      color: #feca57;
-      box-shadow: 
-        inset 0 0 10px rgba(0, 0, 0, 0.5),
-        0 5px 15px rgba(0, 0, 0, 0.3);
-      border: 3px solid #feca57;
+      width: 100%;
+      min-height: 300px;
+    }
+
+    .brick {
+      width: 280px;
+      height: 250px;
+      margin: 0 auto;
+      background-image: url('https://i.ibb.co/zWryWLJq/1200x1106-Photoroom.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
       position: relative;
-      overflow: hidden;
-      transition: transform 0.3s;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 0 15px rgba(255, 165, 0, 0.7));
+      z-index: 5;
     }
 
-    .symbol-wheel:hover {
-      transform: translateY(-5px);
+    .brick.easy {
+      filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.7)) brightness(1.1);
     }
 
-    .symbol-wheel::before {
-      content: '';
+    .brick.medium {
+      filter: drop-shadow(0 0 20px rgba(255, 165, 0, 0.8)) brightness(1.1) hue-rotate(15deg);
+    }
+
+    .brick.hard {
+      filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.8)) brightness(1.1) hue-rotate(330deg);
+      animation: redGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes redGlow {
+      0% { filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.8)) brightness(1.1) hue-rotate(330deg); }
+      100% { filter: drop-shadow(0 0 35px rgba(255, 50, 50, 1)) brightness(1.3) hue-rotate(320deg); }
+    }
+
+    .brick.hit {
+      animation: lightHit 0.4s ease-out;
+    }
+
+    .brick.heavy-hit {
+      animation: heavyHit 0.6s ease-out;
+    }
+
+    .brick.critical-hit {
+      animation: criticalHit 0.8s ease-out;
+    }
+
+    .brick.mega-hit {
+      animation: megaHit 1.2s ease-out;
+    }
+
+    .brick.ultra-hit {
+      animation: ultraHit 1.5s ease-out;
+    }
+
+    .brick.cracked {
+      filter: brightness(0.7) drop-shadow(0 0 15px rgba(255, 0, 0, 0.8));
+      animation: redPulse 1s infinite;
+    }
+
+    .brick.broken {
+      opacity: 0.3;
+      filter: grayscale(100%) brightness(0.3);
+      animation: knockout 1.5s ease-out forwards;
+    }
+
+    @keyframes lightHit {
+      0% { transform: translateX(0) rotate(0deg); }
+      25% { transform: translateX(-10px) rotate(-5deg); }
+      50% { transform: translateX(5px) rotate(3deg); }
+      75% { transform: translateX(-3px) rotate(-2deg); }
+      100% { transform: translateX(0) rotate(0deg); }
+    }
+
+    @keyframes heavyHit {
+      0% { transform: translateX(0) rotate(0deg) scale(1); }
+      20% { transform: translateX(-15px) rotate(-10deg) scale(0.95); }
+      40% { transform: translateX(8px) rotate(5deg) scale(1.05); }
+      60% { transform: translateX(-4px) rotate(-3deg) scale(0.98); }
+      80% { transform: translateX(2px) rotate(2deg) scale(1.02); }
+      100% { transform: translateX(0) rotate(0deg) scale(1); }
+    }
+
+    @keyframes criticalHit {
+      0% { transform: translateX(0) rotate(0deg) scale(1); }
+      15% { transform: translateX(-20px) rotate(-15deg) scale(0.9); }
+      30% { transform: translateX(12px) rotate(10deg) scale(1.1); }
+      45% { transform: translateX(-8px) rotate(-6deg) scale(0.95); }
+      60% { transform: translateX(5px) rotate(4deg) scale(1.05); }
+      75% { transform: translateX(-3px) rotate(-2deg) scale(0.98); }
+      90% { transform: translateX(1px) rotate(1deg) scale(1.02); }
+      100% { transform: translateX(0) rotate(0deg) scale(1); }
+    }
+
+    @keyframes megaHit {
+      0% { transform: translateX(0) rotate(0deg) scale(1); }
+      10% { transform: translateX(-25px) rotate(-20deg) scale(0.85); }
+      20% { transform: translateX(15px) rotate(12deg) scale(1.15); }
+      30% { transform: translateX(-12px) rotate(-8deg) scale(0.9); }
+      40% { transform: translateX(8px) rotate(6deg) scale(1.1); }
+      50% { transform: translateX(-6px) rotate(-4deg) scale(0.95); }
+      60% { transform: translateX(4px) rotate(3deg) scale(1.05); }
+      70% { transform: translateX(-2px) rotate(-2deg) scale(0.98); }
+      80% { transform: translateX(1px) rotate(1deg) scale(1.02); }
+      90% { transform: translateX(-0.5px) rotate(-0.5deg) scale(0.99); }
+      100% { transform: translateX(0) rotate(0deg) scale(1); }
+    }
+
+    @keyframes ultraHit {
+      0% { transform: translateX(0) rotate(0deg) scale(1); }
+      8% { transform: translateX(-30px) rotate(-25deg) scale(0.8); }
+      16% { transform: translateX(20px) rotate(15deg) scale(1.2); }
+      24% { transform: translateX(-15px) rotate(-12deg) scale(0.85); }
+      32% { transform: translateX(12px) rotate(10deg) scale(1.15); }
+      40% { transform: translateX(-8px) rotate(-8deg) scale(0.9); }
+      48% { transform: translateX(6px) rotate(5deg) scale(1.1); }
+      56% { transform: translateX(-4px) rotate(-4deg) scale(0.95); }
+      64% { transform: translateX(3px) rotate(3deg) scale(1.05); }
+      72% { transform: translateX(-2px) rotate(-2deg) scale(0.98); }
+      80% { transform: translateX(1px) rotate(1deg) scale(1.02); }
+      88% { transform: translateX(-0.5px) rotate(-0.5deg) scale(0.99); }
+      96% { transform: translateX(0.3px) rotate(0.3deg) scale(1.01); }
+      100% { transform: translateX(0) rotate(0deg) scale(1); }
+    }
+
+    @keyframes knockout {
+      0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+      30% { transform: translateY(-10px) rotate(-15deg) scale(0.95); opacity: 0.9; }
+      70% { transform: translateY(40px) rotate(-90deg) scale(0.8); opacity: 0.7; }
+      100% { transform: translateY(60px) rotate(-90deg) scale(0.7); opacity: 0.4; }
+    }
+
+    @keyframes redPulse {
+      0%, 100% { filter: brightness(0.7) drop-shadow(0 0 15px rgba(255, 0, 0, 0.8)); }
+      50% { filter: brightness(0.5) drop-shadow(0 0 25px rgba(255, 0, 0, 1)); }
+    }
+
+    .screen-shake {
+      animation: screenShake 0.4s ease-out;
+    }
+
+    .mega-shake {
+      animation: megaShake 0.8s ease-out;
+    }
+
+    .ultra-shake {
+      animation: ultraShake 1.2s ease-out;
+    }
+
+    @keyframes screenShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-3px); }
+      75% { transform: translateX(3px); }
+    }
+
+    @keyframes megaShake {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      10% { transform: translateX(-5px) translateY(-2px); }
+      20% { transform: translateX(5px) translateY(2px); }
+      30% { transform: translateX(-4px) translateY(-1px); }
+      40% { transform: translateX(4px) translateY(1px); }
+      50% { transform: translateX(-3px) translateY(-1px); }
+      60% { transform: translateX(3px) translateY(1px); }
+      70% { transform: translateX(-2px) translateY(-0.5px); }
+      80% { transform: translateX(2px) translateY(0.5px); }
+    }
+
+    @keyframes ultraShake {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      5% { transform: translateX(-8px) translateY(-3px); }
+      10% { transform: translateX(8px) translateY(3px); }
+      15% { transform: translateX(-6px) translateY(-2px); }
+      20% { transform: translateX(6px) translateY(2px); }
+      25% { transform: translateX(-4px) translateY(-1px); }
+      30% { transform: translateX(4px) translateY(1px); }
+      35% { transform: translateX(-3px) translateY(-1px); }
+      40% { transform: translateX(3px) translateY(1px); }
+      45% { transform: translateX(-2px) translateY(-0.5px); }
+      50% { transform: translateX(2px) translateY(0.5px); }
+      55% { transform: translateX(-1px) translateY(-0.2px); }
+      60% { transform: translateX(1px) translateY(0.2px); }
+    }
+
+    .impact-effect {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
+      font-size: 2em;
       pointer-events: none;
+      z-index: 3;
+      animation: impactPop 1s ease-out forwards;
+      opacity: 0;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
     }
 
-    .symbol-wheel::after {
-      content: '';
+    @keyframes impactPop {
+      0% { opacity: 0; transform: scale(0.3) translateY(0); }
+      30% { opacity: 1; transform: scale(1.3) translateY(-10px); }
+      100% { opacity: 0; transform: scale(1) translateY(-30px); }
+    }
+
+    /* Styles pour Mario */
+    .mario {
       position: absolute;
-      top: 50%;
+      width: 120px;
+      height: 120px;
+      background-image: url('https://i.gifer.com/1aFh.gif');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: 6;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: all 0.3s ease;
+    }
+
+    .mario.jumping {
+      animation: marioJump 0.6s ease-out;
+    }
+
+    @keyframes marioJump {
+      0% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-100px); }
+      100% { transform: translateX(-50%) translateY(0); }
+    }
+
+    /* Animation d'attaque spéciale */
+    .special-attack {
+      position: absolute;
+      width: 150px;
+      height: 150px;
       left: 0;
-      right: 0;
-      height: 2px;
-      background: #feca57;
-      box-shadow: 0 0 10px #feca57;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      pointer-events: none;
+      opacity: 0;
     }
 
-    .symbol-wheel.winning {
-      animation: winPulse 0.5s ease-in-out 3;
-      background: linear-gradient(145deg, #ffd700, #ffed4e);
-      color: white;
-      border-color: #ffd700;
+    .special-attack.active {
+      animation: specialAttackAnim 1s ease-out forwards;
     }
 
-    .symbol-wheel.partial-win {
-      background: linear-gradient(145deg, #ffd700, #ffed4e);
-      border-color: #ffd700;
-      animation: partialWinPulse 1s ease-in-out infinite;
-    }
-
-    @keyframes partialWinPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    @keyframes winPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-
-    .symbol-wheel.spinning {
-      animation: spinSymbol 0.1s linear infinite;
-    }
-
-    .symbol-wheel.fast-spin {
-      animation: spinSymbol 0.03s linear infinite;
-    }
-
-    @keyframes spinSymbol {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-      100% { transform: translateY(0); }
-    }
-
-    .symbol-image {
-      width: 60px;
-      height: 60px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    @keyframes specialAttackAnim {
+      0% {
+        opacity: 0;
+        transform: translateY(-50%) translateX(-50px) scale(0.5);
+      }
+      20% {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0) scale(1);
+      }
+      80% {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-50%) translateX(20px) scale(0.8);
+      }
     }
 
     .attack-modes {
       display: flex;
       justify-content: center;
-      gap: 15px;
-      margin: 20px 0;
+      gap: 12px;
+      margin: 15px 0;
       flex-wrap: wrap;
     }
 
-    .attack-modes-row {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      width: 100%;
-      flex-wrap: wrap;
-    }
-
-    .attack-mode-btn {
-      padding: 15px 20px;
-      font-size: 18px;
+    .attack-mode-image {
+      width: 110px;
+      height: 110px;
       cursor: pointer;
       border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 20px;
+      border-radius: 15px;
       background: rgba(255, 255, 255, 0.1);
-      color: #fff;
       transition: all 0.3s ease;
       backdrop-filter: blur(5px);
-      min-width: 120px;
-      font-weight: bold;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 10px;
       position: relative;
-      overflow: hidden;
     }
 
-    .attack-mode-btn:hover {
+    .attack-mode-image:hover {
       background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
     }
 
-    .attack-mode-btn.active {
-      background: linear-gradient(45deg, #ff6b9d, #feca57);
+    .attack-mode-image.active {
       border-color: #fff;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
     }
 
-    .attack-mode-image {
-      width: 50px;
-      height: 50px;
+    .attack-mode-image img {
+      width: 65px;
+      height: 65px;
       object-fit: contain;
-      margin-bottom: 8px;
-      filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    }
+
+    .attack-mode-label {
+      font-size: 13px;
+      margin-top: 5px;
+      font-weight: bold;
+      color: #ffffff;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .multiplier-indicator {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: linear-gradient(45deg, #ff6b9d, #ff8c00);
+      color: #000;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      border: 2px solid white;
     }
 
     .controls {
-      margin: 25px 0;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .main-controls {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      width: 100%;
-      margin-top: 15px;
+      margin: 15px 0;
     }
 
     button {
-      padding: 15px 30px;
-      margin: 5px;
-      font-size: 18px;
+      padding: 12px 25px;
+      margin: 8px;
+      font-size: 14px;
       cursor: pointer;
       border: none;
-      border-radius: 50px;
+      border-radius: 20px;
       background: linear-gradient(45deg, #ff6b9d, #c44569);
-      color: #fff;
+      color: #ffffff;
       transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       text-transform: uppercase;
       font-weight: bold;
-      letter-spacing: 1px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: 0.5s;
-    }
-
-    button:hover::before {
-      left: 100%;
+      letter-spacing: 0.5px;
     }
 
     button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-      background: linear-gradient(45deg, #feca57, #ff6b9d);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(45deg, #ff8c00, #ff6b9d);
     }
 
     button:active {
       transform: translateY(0);
     }
 
-    button:disabled {
-      background: #555;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
+    #resetBtn {
+      background: linear-gradient(45deg, #555, #777);
     }
 
-    button:disabled:hover::before {
-      left: -100%;
-    }
-
-    #spinBtn {
-      background: linear-gradient(45deg, #27ae60, #2ecc71);
-      font-size: 20px;
-      padding: 18px 40px;
-    }
-
-    #spinBtn:hover {
-      background: linear-gradient(45deg, #2ecc71, #27ae60);
-    }
-
-    #speedBtn {
-      background: linear-gradient(45deg, #3498db, #2980b9);
-      font-size: 16px;
-      padding: 15px 25px;
-    }
-
-    #speedBtn:hover {
-      background: linear-gradient(45deg, #2980b9, #3498db);
-    }
-
-    #speedBtn.active {
-      background: linear-gradient(45deg, #e74c3c, #c0392b);
-      animation: pulseSpeed 1s infinite;
-    }
-
-    @keyframes pulseSpeed {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+    #resetBtn:hover {
+      background: linear-gradient(45deg, #777, #999);
     }
 
     #message {
-      margin: 20px 0;
-      font-size: 1.3em;
+      margin: 15px 0;
+      font-size: 1.1em;
       font-weight: bold;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-      min-height: 40px;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+      min-height: 25px;
+      color: #ffffff;
+    }
+
+    /* Styles pour la popup de victoire */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
     }
 
-    .result-box {
-      background: linear-gradient(135deg, rgba(39, 174, 96, 0.9), rgba(46, 204, 113, 0.9));
-      padding: 20px;
-      border-radius: 15px;
-      margin: 20px 0;
-      border: 2px solid rgba(255, 255, 255, 0.5);
+    .popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup-content {
+      background: linear-gradient(135deg, rgba(255, 107, 157, 0.95), rgba(255, 140, 0, 0.95));
+      padding: 25px;
+      border-radius: 20px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 3px solid rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(10px);
-      animation: fadeInUp 0.5s ease;
+      transform: scale(0.7);
+      transition: transform 0.4s ease;
+      position: relative;
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .popup-overlay.active .popup-content {
+      transform: scale(1);
+    }
+
+    .popup-content h3 {
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .popup-reward-image {
+      width: 140px;
+      height: 140px;
+      margin: 15px auto;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .popup-reward-text {
+      font-size: 1.3em;
+      margin: 15px 0;
+      color: #ffffff;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .popup-victory-message {
+      font-size: 1.4em;
+      margin: 15px 0;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 140, 0, 0.7);
+      font-weight: bold;
+    }
+
+    .popup-close-btn {
+      padding: 10px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 20px;
+      background: linear-gradient(45deg, #ff6b9d, #c44569);
+      color: #ffffff;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .popup-close-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(45deg, #ff8c00, #ff6b9d);
     }
 
     .hidden {
       display: none;
     }
 
-    .stats {
-      display: flex;
-      justify-content: space-around;
-      margin: 20px 0;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 15px;
-      border-radius: 10px;
-      flex-wrap: wrap;
-    }
-
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-      margin: 5px 10px;
-    }
-
-    .stat-value {
-      font-size: 1.8em;
-      font-weight: bold;
-      color: #feca57;
-    }
-
-    /* TABLEAU DES RÉCOMPENSES */
-    .gains-history {
-      margin: 20px auto;
-      max-width: 600px;
-      background: rgba(0, 0, 0, 0.5);
+    .coins-display {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(45deg, #ff6b9d, #ff8c00);
+      color: white;
+      padding: 4px 12px;
       border-radius: 15px;
-      padding: 15px;
-      border: 2px solid #feca57;
+      font-weight: bold;
+      animation: coinPop 1s ease;
+      pointer-events: none;
+      z-index: 4;
     }
 
-    .gains-history h3 {
-      color: #feca57;
-      margin-bottom: 15px;
-      font-size: 1.3em;
-      text-transform: uppercase;
+    @keyframes coinPop {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(15px) scale(0.5);
+      }
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-8px) scale(1.1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-25px) scale(1);
+      }
     }
 
-    .gains-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .gains-table th {
-      background: linear-gradient(45deg, #feca57, #ff6b9d);
-      color: white;
-      padding: 10px;
-      text-align: center;
+    .combo-indicator {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: linear-gradient(45deg, #ff6b9d, #c44569);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
       font-size: 0.9em;
-      text-transform: uppercase;
+      display: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      border: 2px solid rgba(255,255,255,0.2);
+      color: #ffffff;
     }
 
-    .gains-table td {
-      padding: 8px;
-      text-align: center;
-      color: white;
-      border-bottom: 1px solid rgba(254, 202, 87, 0.3);
+    .difficulty-selector {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 15px 0;
     }
 
-    .gains-table tr:nth-child(even) {
-      background: rgba(255, 255, 255, 0.05);
+    .difficulty-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
     }
 
-    .gains-table .gain-amount {
-      color: #feca57;
-      font-weight: bold;
-      font-size: 1.1em;
+    .difficulty-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
     }
 
-    .gains-table .drop-amount {
-      color: #f39c12;
-      font-weight: bold;
-      font-size: 1.1em;
+    .difficulty-btn:hover::before {
+      background: rgba(0, 0, 0, 0.1);
     }
 
-    .no-gains {
-      text-align: center;
-      color: rgba(255, 255, 255, 0.6);
-      padding: 20px;
-      font-style: italic;
+    .difficulty-btn.noob {
+      background-image: url('https://i.ibb.co/gFMBxFzP/IMG-6063.png');
     }
 
-    .win-animation {
-      position: fixed;
+    .difficulty-btn.buchette {
+      background-image: url('https://i.ibb.co/JMPfpWV/IMG-5851.png');
+    }
+
+    .difficulty-btn.easy {
+      background-image: url('https://i.ibb.co/p6s7HT5n/IMG-7322.png');
+    }
+
+    .difficulty-btn.medium {
+      background-image: url('https://i.ibb.co/hxXnkQh7/IMG-5861.png');
+    }
+
+    .difficulty-btn.hard {
+      background-image: url('https://i.ibb.co/DHBNtX7t/IMG-6573.png');
+    }
+
+    .difficulty-btn.active {
+      border-color: #ff8c00;
+      box-shadow: 0 0 20px rgba(255, 140, 0, 0.8);
+      transform: scale(1.1);
+    }
+
+    .difficulty-btn.active::before {
+      background: rgba(255, 140, 0, 0.2);
+    }
+
+    /* Styles pour mobile */
+    @media (max-width: 480px) {
+      .game-container {
+        padding: 15px;
+        margin: 5px;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+      }
+      
+      .brick {
+        width: 220px;
+        height: 200px;
+      }
+
+      .mario {
+        width: 100px;
+        height: 100px;
+      }
+
+      .special-attack {
+        width: 120px;
+        height: 120px;
+      }
+
+      .difficulty-selector {
+        gap: 10px;
+      }
+
+      .difficulty-btn {
+        width: 70px;
+        height: 70px;
+      }
+      
+      .instructions {
+        padding: 10px;
+        margin: 15px 0;
+      }
+      
+      .instructions h2 {
+        font-size: 1.3em;
+      }
+      
+      .instructions p {
+        font-size: 1em;
+      }
+      
+      .attack-modes {
+        gap: 4px;
+      }
+
+      .attack-mode-btn {
+        padding: 5px 8px;
+        font-size: 11px;
+        min-width: 40px;
+      }
+      
+      button {
+        padding: 10px 20px;
+        font-size: 13px;
+        margin: 5px;
+      }
+      
+      .popup-content {
+        padding: 20px;
+        max-width: 90%;
+      }
+      
+      .popup-reward-image {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .popup-content h3 {
+        font-size: 1.5em;
+      }
+      
+      .popup-reward-text {
+        font-size: 1.1em;
+      }
+      
+      .popup-victory-message {
+        font-size: 1.2em;
+      }
+    }
+
+    /* Effets de particules */
+    .particles-container {
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: #feca57;
-      opacity: 0;
-    }
-
-    @keyframes confettiFall {
-      0% {
-        transform: translateY(-100px) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(1000px) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    .win-text {
-      font-size: 5em;
-      font-weight: bold;
-      color: #feca57;
-      text-shadow: 0 0 20px rgba(254, 202, 87, 0.8);
-      animation: textPulse 1s ease-in-out infinite;
-    }
-
-    @keyframes textPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-
-    .lock-body {
-      width: 100%;
-      max-width: 600px;
-      height: 150px;
-      background: linear-gradient(145deg, #8B4513, #A0522D);
-      margin: 0 auto 20px;
-      border-radius: 10px;
-      position: relative;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .lock-shackle {
-      position: absolute;
-      top: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
-      height: 80px;
-      border: 15px solid #D2691E;
-      border-bottom: none;
-      border-radius: 60px 60px 0 0;
       z-index: 1;
     }
 
-    .speed-indicator {
+    .particle {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      background: linear-gradient(45deg, #e74c3c, #c0392b);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 15px;
-      font-size: 0.8em;
+      width: 4px;
+      height: 4px;
+      background: #ff8c00;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .difficulty-badge {
+      display: inline-block;
+      padding: 5px 15px;
+      border-radius: 20px;
       font-weight: bold;
-      display: none;
-    }
-
-    /* Indicateur de sauvegarde */
-    .save-indicator {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: linear-gradient(45deg, #27ae60, #2ecc71);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-size: 0.9em;
-      font-weight: bold;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 10000;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-
-    .save-indicator.show {
-      opacity: 1;
-    }
-
-    /* Couleurs pour chaque symbole */
-    .symbol-1 { border-color: #9b59b6; }
-    .symbol-2 { border-color: #e74c3c; }
-    .symbol-3 { border-color: #f39c12; }
-    .symbol-4 { border-color: #34495e; }
-    .symbol-5 { border-color: #7f8c8d; }
-    .symbol-6 { border-color: #27ae60; }
-    .symbol-7 { border-color: #8e44ad; }
-    .symbol-8 { border-color: #d35400; }
-    .symbol-9 { border-color: #16a085; }
-    .symbol-10 { border-color: #2980b9; }
-    .symbol-11 { border-color: #f1c40f; }
-
-    .jackpot-hidden {
-      opacity: 0.3;
-      filter: blur(3px);
-    }
-
-    .jackpot-visible {
-      opacity: 1;
-      filter: none;
-    }
-
-    /* Nouveau : Compteur de tours restants */
-    .remaining-turns {
-      background: linear-gradient(45deg, #3498db, #2980b9);
-      padding: 10px;
-      border-radius: 10px;
       margin: 10px 0;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      color: #ffffff;
     }
 
-    .remaining-turns-label {
-      font-size: 1em;
-      margin-bottom: 5px;
+    .difficulty-badge.noob {
+      background: linear-gradient(45deg, #87CEEB, #B0E0E6);
+      color: #000;
+    }
+
+    .difficulty-badge.buchette {
+      background: linear-gradient(45deg, #DDA0DD, #DA70D6);
+    }
+
+    .difficulty-badge.easy {
+      background: linear-gradient(45deg, #4CAF50, #8BC34A);
+    }
+
+    .difficulty-badge.medium {
+      background: linear-gradient(45deg, #FF9800, #FFC107);
+    }
+
+    .difficulty-badge.hard {
+      background: linear-gradient(45deg, #F44336, #E91E63);
+    }
+
+    /* Compteur de points de vie */
+    .hp-counter {
+      background: linear-gradient(45deg, #ff6b9d, #c44569);
       color: white;
-    }
-
-    .remaining-turns-value {
-      font-size: 1.8em;
+      padding: 12px 20px;
+      border-radius: 15px;
       font-weight: bold;
-      color: #feca57;
-    }
-
-    .remaining-turns-progress {
-      width: 100%;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 4px;
-      margin-top: 5px;
-      overflow: hidden;
-    }
-
-    .remaining-turns-progress-bar {
-      height: 100%;
-      background: linear-gradient(45deg, #feca57, #ff6b9d);
-      border-radius: 4px;
-      transition: width 0.5s ease;
-    }
-
-    /* Animations de récompense */
-    .reward-animation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      background: rgba(0, 0, 0, 0.95);
-      animation: rewardFadeIn 0.8s ease;
-    }
-
-    @keyframes rewardFadeIn {
-      from { 
-        opacity: 0; 
-        background: rgba(0, 0, 0, 0);
-      }
-      to { 
-        opacity: 1; 
-        background: rgba(0, 0, 0, 0.95);
-      }
-    }
-
-    .reward-popup {
-      background: linear-gradient(135deg, #ff6b9d, #feca57, #ff6b9d);
-      padding: 40px;
-      border-radius: 25px;
+      font-size: 14px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      margin: 15px auto;
+      max-width: 200px;
       text-align: center;
-      max-width: 600px;
-      animation: rewardScaleIn 0.8s ease;
-      border: 4px solid gold;
-      box-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+    }
+
+    .hp-counter .hp-label {
+      font-size: 12px;
+      opacity: 0.9;
+      display: block;
+      color: #ffffff;
+    }
+
+    .hp-counter .hp-value {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 2px;
+      display: block;
+      color: #ffffff;
+    }
+
+    /* Styles pour le jackpot */
+    .jackpot-container {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      padding: 10px;
+      margin: 15px 0;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+
+    .jackpot-container:hover {
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .jackpot-title {
+      font-size: 1.1em;
+      margin-bottom: 8px;
+      color: #FFD700;
+      text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    }
+
+    .jackpot-amount {
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #FFD700;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+      margin-bottom: 8px;
+    }
+
+    .jackpot-progress-container {
+      width: 100%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+
+    .jackpot-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #FFD700, #FFA500, #FF8C00);
+      border-radius: 6px;
+      transition: width 0.5s ease;
       position: relative;
       overflow: hidden;
-      z-index: 10000;
     }
 
-    .reward-popup::before {
+    .jackpot-progress-bar::after {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-      animation: shine 3s infinite;
-      transform: rotate(45deg);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: shimmer 2s infinite;
     }
 
-    @keyframes shine {
-      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
 
-    @keyframes rewardScaleIn {
-      from { 
-        transform: scale(0.3) rotate(-10deg);
-        opacity: 0;
-      }
-      to { 
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-      }
-    }
-
-    .reward-popup-icon {
-      font-size: 8em;
-      margin-bottom: 20px;
-      animation: rewardBounce 1s infinite, glow 2s infinite;
-      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
-    }
-
-    @keyframes rewardBounce {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-30px) scale(1.2); }
-    }
-
-    @keyframes glow {
-      0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)); }
-      50% { filter: drop-shadow(0 0 40px rgba(255, 255, 255, 1)); }
-    }
-
-    .reward-popup-title {
-      font-size: 3.5em;
-      margin-bottom: 15px;
-      color: white;
-      text-shadow: 0 0 20px rgba(0,0,0,0.8);
-      background: linear-gradient(45deg, #ff6b9d, #feca57);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: titlePulse 2s infinite;
-    }
-
-    @keyframes titlePulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-
-    .reward-popup-description {
-      font-size: 1.5em;
-      margin-bottom: 25px;
-      color: white;
-      font-weight: bold;
-      text-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-
-    .reward-close {
-      padding: 15px 30px;
-      background: linear-gradient(45deg, #2ecc71, #27ae60);
-      border: none;
-      border-radius: 50px;
-      color: white;
-      font-size: 1.3em;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: bold;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      z-index: 10001;
-    }
-
-    .reward-close:hover {
-      background: linear-gradient(45deg, #27ae60, #2ecc71);
-      transform: scale(1.1);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-    }
-
-    /* NOUVEAU : Système de Drop */
-    .drop-pool-display {
-      background: linear-gradient(45deg, #f39c12, #e67e22);
-      padding: 10px;
+    /* Tableau des derniers gains */
+    .winners-table {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 250px;
+      background: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
-      margin: 10px 0;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      padding: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      cursor: move;
+      transition: all 0.3s ease;
     }
 
-    .drop-pool-label {
+    .winners-table:hover {
+      background: rgba(0, 0, 0, 0.7);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .winners-title {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+      color: #FFD700;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+      padding-bottom: 5px;
+    }
+
+    .winners-list {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .winner-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       font-size: 0.9em;
-      margin-bottom: 5px;
-      color: white;
     }
 
-    .drop-pool-value {
-      font-size: 1.5em;
+    .winner-name {
+      color: #ffffff;
+    }
+
+    .winner-amount {
+      color: #FFD700;
       font-weight: bold;
-      color: #feca57;
     }
 
-    .drop-animation {
+    .jackpot-winner {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      background: rgba(0, 0, 0, 0.8);
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 9999;
-      background: rgba(0, 0, 0, 0.85);
-      animation: dropFadeIn 0.5s ease;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s ease;
     }
 
-    @keyframes dropFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .jackpot-winner.active {
+      opacity: 1;
+      visibility: visible;
     }
 
-    .drop-popup {
-      background: linear-gradient(135deg, #f39c12, #e67e22, #f39c12);
+    .jackpot-winner-content {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.95), rgba(255, 140, 0, 0.95));
       padding: 30px;
       border-radius: 20px;
-      text-align: center;
       max-width: 500px;
-      animation: dropScaleIn 0.6s ease;
-      border: 4px solid #feca57;
-      box-shadow: 0 0 40px rgba(243, 156, 18, 0.8);
-      position: relative;
-      overflow: hidden;
-      z-index: 10000;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 3px solid rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      transform: scale(0.7);
+      transition: transform 0.5s ease;
     }
 
-    @keyframes dropScaleIn {
-      from { 
-        transform: scale(0.2) rotate(-5deg);
-        opacity: 0;
-      }
-      to { 
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-      }
+    .jackpot-winner.active .jackpot-winner-content {
+      transform: scale(1);
     }
 
-    .drop-popup-icon {
-      font-size: 6em;
-      margin-bottom: 15px;
-      animation: dropBounce 0.8s infinite;
-      filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
-    }
-
-    @keyframes dropBounce {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-20px) scale(1.1); }
-    }
-
-    .drop-popup-title {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      color: white;
-      text-shadow: 0 0 15px rgba(0,0,0,0.8);
-      background: linear-gradient(45deg, #f39c12, #e67e22);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .drop-popup-description {
-      font-size: 1.3em;
+    .jackpot-winner-content h3 {
+      font-size: 2em;
       margin-bottom: 20px;
-      color: white;
-      font-weight: bold;
-      text-shadow: 0 0 8px rgba(0,0,0,0.5);
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
-    .drop-close {
-      padding: 12px 25px;
-      background: linear-gradient(45deg, #f39c12, #e67e22);
-      border: none;
-      border-radius: 50px;
-      color: white;
-      font-size: 1.1em;
+    .jackpot-winner-amount {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #FFD700;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.9);
+      margin: 20px 0;
+    }
+
+    .jackpot-winner-message {
+      font-size: 1.3em;
+      margin: 20px 0;
+      color: #ffffff;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .jackpot-close-btn {
+      padding: 12px 30px;
+      font-size: 16px;
       cursor: pointer;
-      transition: all 0.3s;
-      font-weight: bold;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      z-index: 10001;
-    }
-
-    .drop-close:hover {
-      background: linear-gradient(45deg, #e67e22, #f39c12);
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-    }
-
-    /* NOUVEAU : Boutons de contrôle supplémentaires */
-    .extra-controls {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 100;
-    }
-
-    .extra-controls button {
-      padding: 10px 15px;
-      font-size: 14px;
-      background: linear-gradient(45deg, #9b59b6, #8e44ad);
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-
-    .extra-controls button:hover {
-      background: linear-gradient(45deg, #8e44ad, #9b59b6);
-    }
-
-    .extra-controls button.active {
-      background: linear-gradient(45deg, #e74c3c, #c0392b);
-      animation: pulseSpeed 1s infinite;
-    }
-
-    .light-speed-controls {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 100;
-    }
-
-    .light-speed-controls button {
-      padding: 10px 15px;
-      font-size: 14px;
-      background: linear-gradient(45deg, #3498db, #2980b9);
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-
-    .light-speed-controls button:hover {
-      background: linear-gradient(45deg, #2980b9, #3498db);
-    }
-
-    .light-speed-controls button.active {
-      background: linear-gradient(45deg, #f39c12, #e67e22);
-      animation: pulseSpeed 1s infinite;
-    }
-
-    .jackpot-controls {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 100;
-    }
-
-    .jackpot-controls button {
-      padding: 10px 15px;
-      font-size: 14px;
-      background: linear-gradient(45deg, #e74c3c, #c0392b);
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-
-    .jackpot-controls button:hover {
-      background: linear-gradient(45deg, #c0392b, #e74c3c);
-    }
-
-    .jackpot-controls button.active {
-      background: linear-gradient(45deg, #f39c12, #e67e22);
-      animation: pulseSpeed 1s infinite;
-    }
-
-    /* Popup pour 4 ou 5 symboles */
-    .partial-win-popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      background: rgba(0, 0, 0, 0.85);
-      animation: partialWinFadeIn 0.5s ease;
-    }
-
-    @keyframes partialWinFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .partial-win-content {
-      background: linear-gradient(135deg, #f39c12, #e67e22, #f39c12);
-      padding: 30px;
+      border: none;
       border-radius: 20px;
-      text-align: center;
-      max-width: 500px;
-      animation: partialWinScaleIn 0.6s ease;
-      border: 4px solid #feca57;
-      box-shadow: 0 0 40px rgba(243, 156, 18, 0.8);
-      position: relative;
-      overflow: hidden;
-      z-index: 10000;
-    }
-
-    @keyframes partialWinScaleIn {
-      from { 
-        transform: scale(0.2) rotate(-5deg);
-        opacity: 0;
-      }
-      to { 
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-      }
-    }
-
-    .partial-win-icon {
-      font-size: 6em;
-      margin-bottom: 15px;
-      animation: partialWinBounce 0.8s infinite;
-      filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
-    }
-
-    @keyframes partialWinBounce {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-20px) scale(1.1); }
-    }
-
-    .partial-win-title {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      color: white;
-      text-shadow: 0 0 15px rgba(0,0,0,0.8);
-      background: linear-gradient(45deg, #f39c12, #e67e22);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .partial-win-description {
-      font-size: 1.3em;
-      margin-bottom: 20px;
-      color: white;
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      color: #000;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       font-weight: bold;
-      text-shadow: 0 0 8px rgba(0,0,0,0.5);
+      margin-top: 15px;
     }
 
-    .partial-win-close {
-      padding: 12px 25px;
-      background: linear-gradient(45deg, #f39c12, #e67e22);
-      border: none;
-      border-radius: 50px;
-      color: white;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: bold;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      z-index: 10001;
-    }
-
-    .partial-win-close:hover {
-      background: linear-gradient(45deg, #e67e22, #f39c12);
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-    }
-
-    @media (max-width: 768px) {
-      .game-container {
-        padding: 20px;
-        margin: 10px;
-      }
-      
-      h1 {
-        font-size: 2.2em;
-      }
-      
-      .symbol-wheel {
-        width: 70px;
-        height: 100px;
-      }
-      
-      .symbol-image {
-        width: 50px;
-        height: 50px;
-      }
-      
-      button {
-        padding: 12px 25px;
-        font-size: 16px;
-      }
-      
-      #spinBtn {
-        font-size: 18px;
-        padding: 15px 30px;
-      }
-
-      .attack-mode-btn {
-        padding: 12px 15px;
-        font-size: 14px;
-        min-width: 100px;
-      }
-
-      .controls {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .extra-controls, .light-speed-controls, .jackpot-controls {
-        position: static;
-        flex-direction: row;
-        justify-content: center;
-        margin: 10px 0;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .symbol-wheel {
-        width: 60px;
-        height: 90px;
-      }
-      
-      .symbol-image {
-        width: 40px;
-        height: 40px;
-      }
-      
-      .lock-container {
-        gap: 8px;
-      }
-
-      .attack-modes {
-        gap: 5px;
-      }
-
-      .attack-mode-btn {
-        padding: 10px 12px;
-        font-size: 12px;
-        min-width: 80px;
-      }
+    .jackpot-close-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(45deg, #FFA500, #FF8C00);
     }
   </style>
 </head>
 <body>
-  <!-- NOUVEAU : Contrôles supplémentaires hors de la zone de jeu -->
-  <div class="extra-controls">
-    <button id="superSpeedBtn">⚡ Super Vitesse</button>
-    <button id="ultraSpeedBtn">🚀 Ultra Vitesse</button>
+  <!-- Tableau des derniers gains (déplaçable) -->
+  <div class="winners-table" id="winnersTable">
+    <div class="winners-title">🎰 Derniers Jackpots 🎰</div>
+    <div class="winners-list" id="winnersList">
+      <!-- Les gains seront ajoutés dynamiquement ici -->
+    </div>
   </div>
 
-  <div class="light-speed-controls">
-    <button id="slowLightsBtn">🐢 Lumières Lentes</button>
-    <button id="fastLightsBtn">⚡ Lumières Rapides</button>
-  </div>
+  <div class="game-container" id="gameContainer">
+    <div class="combo-indicator" id="comboIndicator">COMBO x0</div>
 
-  <div class="jackpot-controls">
-    <button id="increaseJackpotBtn">➕ Augmenter Jackpot</button>
-    <button id="decreaseJackpotBtn">➖ Diminuer Jackpot</button>
-    <button id="setJackpotBtn">🎯 Définir Jackpot</button>
-  </div>
-
-  <div class="game-container">
-    <h1>🎰 Jackpot des Symboles Mystères</h1>
+    <h1>🎮 Casse la Brique Magique de Mario !</h1>
     
-    <!-- Compteur de roses jackpot -->
-    <div class="jackpot-display" id="jackpotDisplay">
-      <div class="jackpot-label">JACKPOT ACTUEL</div>
-      <div class="jackpot-amount" id="jackpotAmount">250 🌹</div>
-      <div class="jackpot-info" id="jackpotInfo">Jackpot visible à partir de 1000 roses</div>
-    </div>
-
-    <!-- NOUVEAU : Affichage du pool de drop -->
-    <div class="drop-pool-display" id="dropPoolDisplay">
-      <div class="drop-pool-label">POOL DE DROP</div>
-      <div class="drop-pool-value" id="dropPoolValue">0 pièces</div>
-      <div class="drop-pool-info" id="dropPoolInfo">Chance de 1/500 de gagner des pièces</div>
-    </div>
-
-    <!-- Compteur de tours restants -->
-    <div class="remaining-turns" id="remainingTurns">
-      <div class="remaining-turns-label">Tours restants</div>
-      <div class="remaining-turns-value" id="remainingTurnsValue">0</div>
-      <div class="remaining-turns-progress">
-        <div class="remaining-turns-progress-bar" id="remainingTurnsProgress" style="width: 0%"></div>
+    <!-- Barre de jackpot discrète -->
+    <div class="jackpot-container">
+      <div class="jackpot-title">JACKPOT</div>
+      <div class="jackpot-amount" id="jackpotAmount">1 000 🌹</div>
+      <div class="jackpot-progress-container">
+        <div class="jackpot-progress-bar" id="jackpotProgressBar" style="width: 0%"></div>
       </div>
     </div>
     
-    <div class="lock-body">
-      <div class="lock-shackle"></div>
-      <div class="lock-container" id="lockContainer">
-        <!-- Les roues de symboles seront générées ici -->
-      </div>
+    <div class="difficulty-selector">
+      <div class="difficulty-btn noob active" data-difficulty="noob" title="Noob - 1500 HP"></div>
+      <div class="difficulty-btn buchette" data-difficulty="buchette" title="Buchette - 5000 HP"></div>
+      <div class="difficulty-btn easy" data-difficulty="easy" title="Facile - 15000 HP"></div>
+      <div class="difficulty-btn medium" data-difficulty="medium" title="Moyen - 25000 HP"></div>
+      <div class="difficulty-btn hard" data-difficulty="hard" title="Difficile - 50000 HP"></div>
+    </div>
+    
+    <div class="brick-container">
+      <div class="special-attack" id="specialAttack"></div>
+      <div class="brick easy" id="brick"></div>
+      <div class="mario" id="mario"></div>
+      <div class="particles-container" id="particlesContainer"></div>
+    </div>
+
+    <div class="instructions">
+      <h2>🎮 Casse la Brique Magique et Gagne le Trésor ! 🎮</h2>
+      <p>Un Coup = Un Point de Vie en Moins</p>
     </div>
 
     <div class="attack-modes">
-      <div class="attack-modes-row">
-        <button id="mode1" class="attack-mode-btn active">
-          <img src="https://i.ibb.co/WNXDxn2y/IMG-7354-Photoroom.png" alt="Rose - 1 tour" class="attack-mode-image">
-          <div>1 tour</div>
-        </button>
-        <button id="mode10" class="attack-mode-btn">
-          <img src="https://i.ibb.co/7JsBRrCn/IMG-5885.png" alt="Rosa - 10 tours" class="attack-mode-image">
-          <div>10 tours</div>
-        </button>
-        <button id="mode30" class="attack-mode-btn">
-          <img src="https://i.ibb.co/8DMJ0cxy/IMG-7355-Photoroom.png" alt="Donuts - 30 tours" class="attack-mode-image">
-          <div>30 tours</div>
-        </button>
-        <button id="mode100" class="attack-mode-btn">
-          <img src="https://i.ibb.co/C5M6DHcS/IMG-7356-Photoroom.png" alt="Coeurs - 100 tours" class="attack-mode-image">
-          <div>100 tours</div>
-        </button>
+      <div id="mode1" class="attack-mode-image active">
+        <img src="https://i.ibb.co/WNXDxn2y/IMG-7354-Photoroom.png" alt="Rose - 1 coup">
+        <div class="attack-mode-label">1 coup</div>
       </div>
-      <div class="attack-modes-row">
-        <button id="mode1000" class="attack-mode-btn">
-          <img src="https://i.ibb.co/nNy17WfL/IMG-6065.png" alt="Mini Gun - 1000 tours" class="attack-mode-image">
-          <div>1,000 tours</div>
-        </button>
-        <button id="mode2000" class="attack-mode-btn">
-          <img src="https://i.ibb.co/JMPfpWV/IMG-5851.png" alt="Galaxie - 2000 tours" class="attack-mode-image">
-          <div>2,000 tours</div>
-        </button>
-        <button id="mode5000" class="attack-mode-btn">
-          <img src="https://i.ibb.co/0pM1D3wm/IMG-7123.png" alt="Ultime - 5000 tours" class="attack-mode-image">
-          <div>5,000 tours</div>
-        </button>
+      <div id="mode10" class="attack-mode-image">
+        <img src="https://i.ibb.co/7JsBRrCn/IMG-5885.png" alt="Rosa - 10 coups">
+        <div class="attack-mode-label">10 coups</div>
       </div>
-    </div>
-
-    <!-- Contrôles principaux -->
-    <div class="main-controls">
-      <button id="spinBtn">Tourner les rouleaux</button>
-      <button id="speedBtn">⏩ Accélérer</button>
-    </div>
-
-    <!-- Statistiques -->
-    <div class="stats">
-      <div class="stat-item">
-        <div>Tours totaux</div>
-        <div class="stat-value" id="attemptsCount">0</div>
+      <div id="mode30" class="attack-mode-image">
+        <img src="https://i.ibb.co/8DMJ0cxy/IMG-7355-Photoroom.png" alt="Donuts - 30 coups">
+        <div class="attack-mode-label">30 coups</div>
       </div>
-      <div class="stat-item">
-        <div>Tours cette partie</div>
-        <div class="stat-value" id="currentGameAttempts">0</div>
+      <div id="mode100" class="attack-mode-image">
+        <img src="https://i.ibb.co/C5M6DHcS/IMG-7356-Photoroom.png" alt="Coeurs - 100 coups">
+        <div class="attack-mode-label">100 coups</div>
       </div>
-      <div class="stat-item">
-        <div>Roses totales</div>
-        <div class="stat-value" id="rosesCount">0</div>
+      <div id="mode500" class="attack-mode-image">
+        <img src="https://i.ibb.co/nNy17WfL/IMG-6065.png" alt="Mini Gun - 500 coups">
+        <div class="attack-mode-label">500 coups</div>
       </div>
-      <div class="stat-item">
-        <div>Prochain bonus</div>
-        <div class="stat-value" id="nextBonus">30</div>
-      </div>
-    </div>
-
-    <!-- Tableau des récompenses -->
-    <div class="gains-history">
-      <h3>🏆 Récompenses 🏆</h3>
-      <div id="gainsTableContainer">
-        <div class="no-gains">Aucun jackpot gagné pour le moment</div>
+      <div id="mode1000" class="attack-mode-image">
+        <img src="https://i.ibb.co/JMPfpWV/IMG-5851.png" alt="Galaxie - 1000 coups">
+        <div class="attack-mode-label">1000 coups</div>
       </div>
     </div>
 
     <div class="controls">
-      <button id="resetBtn">Réinitialiser Jackpot</button>
-      <button id="clearBtn" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">🗑️ Effacer données</button>
-      <!-- NOUVEAU : Bouton pour réinitialiser les récompenses -->
-      <button id="resetRewardsBtn" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">🔄 Réinitialiser Récompenses</button>
+      <button id="attackBtn">Attaquer (1 coup)</button>
+      <button id="resetBtn">Nouvelle Brique</button>
     </div>
 
-    <div id="message">Prêt à jouer ? Alignez 6 symboles identiques pour remporter le jackpot !</div>
-
-    <div id="resultContainer" class="hidden result-box">
-      <h3>🎉 JACKPOT GAGNÉ !</h3>
-      <p id="winMessage">Vous avez aligné les 6 symboles !</p>
-      <p id="attemptsResult">Nombre de tours : 0</p>
-      <p id="winningSymbol">Symbole gagnant : </p>
-      <p id="jackpotWin" class="jackpot-amount">+ 0 🌹</p>
-    </div>
-
-    <div class="speed-indicator" id="speedIndicator">VITESSE RAPIDE</div>
+    <p id="message"></p>
   </div>
 
-  <!-- Indicateur de sauvegarde -->
-  <div class="save-indicator" id="saveIndicator">💾 Sauvegarde automatique</div>
+  <!-- Compteur de points de vie -->
+  <div class="hp-counter" id="hpCounter">
+    <span class="hp-label">Points de vie restants</span>
+    <span class="hp-value" id="hpValue">15000 / 15000</span>
+  </div>
+
+  <!-- Popup de victoire -->
+  <div class="popup-overlay" id="victoryPopup">
+    <div class="popup-content">
+      <h3>🎉 Brique Magique Cassée ! 🎉</h3>
+      <div id="popupRewardImage" class="popup-reward-image"></div>
+      <p id="popupRewardText" class="popup-reward-text"></p>
+      <div id="popupVictoryMessage" class="popup-victory-message"></div>
+      <button class="popup-close-btn" id="closePopupBtn">Continuer</button>
+    </div>
+  </div>
+
+  <!-- Popup de jackpot gagné -->
+  <div class="jackpot-winner" id="jackpotWinner">
+    <div class="jackpot-winner-content">
+      <h3>🎰 JACKPOT GAGNÉ ! 🎰</h3>
+      <div class="jackpot-winner-amount" id="jackpotWinnerAmount">1 000 🌹</div>
+      <p class="jackpot-winner-message">Félicitations ! Vous avez remporté le jackpot !</p>
+      <button class="jackpot-close-btn" id="jackpotCloseBtn">Continuer</button>
+    </div>
+  </div>
 
   <script>
-    // Variables du jeu
-    let symbols = [];
-    let attempts = 0; // Compteur total de tours (ne se réinitialise jamais)
-    let currentGameAttempts = 0; // Compteur de tours pour la partie en cours
-    let isSpinning = false;
-    let winAnimationActive = false;
+    let maxHP, currentHP, coupCounter, totalHits;
+    let hitsUntilCoin = 4;
     let attackMode = 1;
-    let currentDifficulty = 6; // 6 symboles (niveau 2 uniquement)
-    let isFastMode = false;
-    let lastWinningSymbol = null;
-    let rosesCount = 0; // Roses totales gagnées (ne se réinitialise jamais)
-    let jackpotAmount = 250; // Commence toujours à 250
-    let bonusCounter = 0;
-    let gainsHistory = []; // Historique des gains
-    let remainingTurns = 0; // Tours restants pour l'attaque en cours
-
-    // NOUVEAU : Variables pour le système de drop
-    let dropPool = 0; // Nombre de pièces dans le pool de drop
-    let dropCounter = 0; // Compteur pour ajouter des pièces au pool tous les 100 tours
-
-    // NOUVEAU : Variables pour les vitesses supplémentaires
-    let isSuperSpeedMode = false;
-    let isUltraSpeedMode = false;
-    let lightSpeed = 3; // Vitesse par défaut pour les lumières (3s)
-
-    // Variables pour les sons
-    let symbolSoundPlaying = false;
-    let spinSoundPlaying = false;
+    let rosesEarnedThisDiamond = 0;
+    let combo = 0;
+    let lastHitTime = 0;
+    let isAttacking = false;
+    let audioContext = null;
+    let currentDifficulty = "noob";
     
-    // Sons
-    const symbolSound = new Audio('https://files.catbox.moe/goq31j.mp3');
-    const spinSound = new Audio('https://files.catbox.moe/0hvif7.mp3');
+    // Variables pour le jackpot
+    let jackpotAmount = 1000;
+    let jackpotProgress = 0;
+    let jackpotHitsCounter = 0;
+    let recentWinners = [];
 
-    // Système de sauvegarde
-    const SAVE_KEY = 'jackpotGameSave';
-    let showSaveIndicator = true; // Pour éviter le spam de notifications
+    const brick = document.getElementById("brick");
+    const mario = document.getElementById("mario");
+    const message = document.getElementById("message");
+    const attackBtn = document.getElementById("attackBtn");
+    const gameContainer = document.getElementById("gameContainer");
+    const comboIndicator = document.getElementById("comboIndicator");
+    const particlesContainer = document.getElementById("particlesContainer");
+    const hpValue = document.getElementById("hpValue");
+    const specialAttack = document.getElementById("specialAttack");
+    
+    // Éléments de la popup
+    const victoryPopup = document.getElementById("victoryPopup");
+    const popupRewardImage = document.getElementById("popupRewardImage");
+    const popupRewardText = document.getElementById("popupRewardText");
+    const popupVictoryMessage = document.getElementById("popupVictoryMessage");
+    const closePopupBtn = document.getElementById("closePopupBtn");
+    
+    // Éléments du jackpot
+    const jackpotAmountElement = document.getElementById("jackpotAmount");
+    const jackpotProgressBar = document.getElementById("jackpotProgressBar");
+    const jackpotWinner = document.getElementById("jackpotWinner");
+    const jackpotWinnerAmount = document.getElementById("jackpotWinnerAmount");
+    const jackpotCloseBtn = document.getElementById("jackpotCloseBtn");
+    
+    // Éléments du tableau des gains
+    const winnersTable = document.getElementById("winnersTable");
+    const winnersList = document.getElementById("winnersList");
 
-    // Fonction de sauvegarde
-    function saveGame(showNotification = true) {
-      const saveData = {
-        attempts: attempts,
-        currentGameAttempts: currentGameAttempts,
-        rosesCount: rosesCount,
+    const impactEffects = ["💥", "🔥", "⭐", "💫", "✨", "💢"];
+
+    // === SYSTÈME DE SAUVEGARDE AUTOMATIQUE ===
+    const SAVE_KEY = 'marioBrickGameSave';
+    
+    // Fonction pour sauvegarder l'état du jeu
+    function saveGameState() {
+      const gameState = {
         jackpotAmount: jackpotAmount,
-        bonusCounter: bonusCounter,
-        gainsHistory: gainsHistory,
-        dropPool: dropPool, // NOUVEAU : Sauvegarder le pool de drop
-        dropCounter: dropCounter, // NOUVEAU : Sauvegarder le compteur de drop
-        lastSaved: new Date().toISOString()
+        jackpotProgress: jackpotProgress,
+        jackpotHitsCounter: jackpotHitsCounter,
+        recentWinners: recentWinners,
+        currentHP: currentHP,
+        maxHP: maxHP,
+        currentDifficulty: currentDifficulty,
+        lastSave: Date.now()
       };
       
       try {
-        localStorage.setItem(SAVE_KEY, JSON.stringify(saveData));
-        
-        // Afficher brièvement l'indicateur de sauvegarde (seulement si demandé)
-        const saveIndicator = document.getElementById('saveIndicator');
-        if (saveIndicator && showNotification && showSaveIndicator) {
-          saveIndicator.classList.add('show');
-          setTimeout(() => {
-            saveIndicator.classList.remove('show');
-          }, 1500);
-        }
-        
-        console.log('Partie sauvegardée automatiquement');
+        localStorage.setItem(SAVE_KEY, JSON.stringify(gameState));
+        console.log('Jeu sauvegardé avec succès');
       } catch (e) {
         console.error('Erreur lors de la sauvegarde:', e);
       }
     }
-
-    // Fonction de chargement
-    function loadGame() {
+    
+    // Fonction pour charger l'état du jeu
+    function loadGameState() {
       try {
-        const savedData = localStorage.getItem(SAVE_KEY);
-        
-        if (savedData) {
-          const data = JSON.parse(savedData);
+        const saved = localStorage.getItem(SAVE_KEY);
+        if (saved) {
+          const gameState = JSON.parse(saved);
           
-          attempts = data.attempts || 0;
-          currentGameAttempts = data.currentGameAttempts || 0;
-          rosesCount = data.rosesCount || 0;
-          jackpotAmount = data.jackpotAmount || 250;
-          bonusCounter = data.bonusCounter || 0;
-          gainsHistory = data.gainsHistory || [];
-          dropPool = data.dropPool || 0; // NOUVEAU : Charger le pool de drop
-          dropCounter = data.dropCounter || 0; // NOUVEAU : Charger le compteur de drop
-          
-          console.log('Partie chargée depuis la sauvegarde');
-          
-          // Afficher un message de bienvenue avec les stats
-          setTimeout(() => {
-            message.textContent = `Bon retour ! Vous avez ${rosesCount} roses totales et ${gainsHistory.length} jackpot(s) gagné(s) !`;
-          }, 500);
-          
-          return true;
+          // Vérifier si la sauvegarde n'est pas trop ancienne (optionnel)
+          const oneDay = 24 * 60 * 60 * 1000; // 1 jour en millisecondes
+          if (gameState.lastSave && (Date.now() - gameState.lastSave < oneDay)) {
+            jackpotAmount = gameState.jackpotAmount || 1000;
+            jackpotProgress = gameState.jackpotProgress || 0;
+            jackpotHitsCounter = gameState.jackpotHitsCounter || 0;
+            recentWinners = gameState.recentWinners || [];
+            currentHP = gameState.currentHP;
+            maxHP = gameState.maxHP;
+            currentDifficulty = gameState.currentDifficulty || "noob";
+            
+            console.log('Jeu chargé avec succès');
+            return true;
+          }
         }
       } catch (e) {
         console.error('Erreur lors du chargement:', e);
       }
-      
       return false;
     }
-
-    // Fonction pour effacer la sauvegarde
-    function clearSave() {
-      if (confirm('⚠️ ATTENTION ⚠️\n\nVoulez-vous vraiment effacer TOUTES vos données de jeu ?\n\nCela supprimera :\n• ' + attempts + ' tours joués\n• ' + rosesCount + ' roses gagnées\n• ' + gainsHistory.length + ' jackpots dans l\'historique\n\nCette action est IRRÉVERSIBLE !')) {
-        localStorage.removeItem(SAVE_KEY);
-        
-        // Réinitialiser toutes les variables
-        attempts = 0;
-        currentGameAttempts = 0;
-        rosesCount = 0;
-        jackpotAmount = 250;
-        bonusCounter = 0;
-        gainsHistory = [];
-        remainingTurns = 0;
-        dropPool = 0; // NOUVEAU : Réinitialiser le pool de drop
-        dropCounter = 0; // NOUVEAU : Réinitialiser le compteur de drop
-        
-        // Réinitialiser l'affichage
-        symbols = Array(currentDifficulty).fill(0).map(() => getRandomSymbol());
-        updateDisplay();
-        updateStats();
-        updateGainsTable();
-        updateJackpotDisplay();
-        updateDropPoolDisplay(); // NOUVEAU : Mettre à jour l'affichage du pool
-        updateRemainingTurns();
-        removeWinClasses();
-        
-        message.textContent = '🗑️ Toutes les données ont été effacées ! Vous repartez de zéro.';
-        
-        // Animation de confirmation
-        const gameContainer = document.querySelector('.game-container');
-        gameContainer.style.animation = 'none';
-        setTimeout(() => {
-          gameContainer.style.animation = '';
-        }, 100);
+    
+    // Sauvegarder automatiquement toutes les 5 secondes
+    setInterval(saveGameState, 5000);
+    
+    // Sauvegarder quand l'utilisateur quitte la page
+    window.addEventListener('beforeunload', saveGameState);
+    
+    // Sauvegarder quand la page devient invisible
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        saveGameState();
       }
-    }
-
-    // NOUVEAU : Fonction pour réinitialiser les récompenses
-    function resetRewards() {
-      if (confirm('⚠️ ATTENTION ⚠️\n\nVoulez-vous vraiment réinitialiser TOUTES vos récompenses ?\n\nCela supprimera :\n• ' + gainsHistory.length + ' jackpots dans l\'historique\n• L\'historique complet des gains\n\nCette action est IRRÉVERSIBLE !')) {
-        gainsHistory = [];
-        
-        // Mettre à jour le tableau des gains
-        updateGainsTable();
-        
-        message.textContent = '🔄 Toutes les récompenses ont été réinitialisées !';
-        
-        // Animation de confirmation
-        const gameContainer = document.querySelector('.game-container');
-        gameContainer.style.animation = 'none';
-        setTimeout(() => {
-          gameContainer.style.animation = '';
-        }, 100);
-        
-        // Sauvegarder les changements
-        saveGame(true);
-      }
-    }
-
-    // Sauvegarde automatique toutes les 10 secondes pendant le jeu
-    setInterval(() => {
-      if (!isSpinning && attempts > 0) {
-        saveGame(true); // Avec notification
-      }
-    }, 10000);
-
-    // Sauvegarder avant de quitter la page
-    window.addEventListener('beforeunload', () => {
-      saveGame(false); // Sans notification car la page se ferme
     });
 
-    // Symboles disponibles avec le nouveau symbole ajouté
-    const symbolTypes = [
-      { 
-        type: 'symbol1', 
-        image: 'https://i.ibb.co/whJNdnxZ/symbol1.png', 
-        name: 'Symbole 1',
-        colorClass: 'symbol-1'
-      },
-      { 
-        type: 'symbol2', 
-        image: 'https://i.ibb.co/ymsZKVwn/symbol2.png', 
-        name: 'Symbole 2',
-        colorClass: 'symbol-2'
-      },
-      { 
-        type: 'symbol3', 
-        image: 'https://i.ibb.co/gbf2RYFk/symbol3.png', 
-        name: 'Symbole 3',
-        colorClass: 'symbol-3'
-      },
-      { 
-        type: 'symbol4', 
-        image: 'https://i.ibb.co/sv8c6sRK/symbol4.png', 
-        name: 'Symbole 4',
-        colorClass: 'symbol-4'
-      },
-      { 
-        type: 'symbol5', 
-        image: 'https://i.ibb.co/Xr6J8bfK/symbol5.png',
-        name: 'Symbole 5',
-        colorClass: 'symbol-5'
-      },
-      { 
-        type: 'symbol6', 
-        image: 'https://i.ibb.co/prk8cpBr/symbol6.png',
-        name: 'Symbole 6',
-        colorClass: 'symbol-6'
-      },
-      { 
-        type: 'symbol7', 
-        image: 'https://i.ibb.co/2fBDM0x/symbol7.png', 
-        name: 'Symbole 7',
-        colorClass: 'symbol-7'
-      },
-      { 
-        type: 'symbol8', 
-        image: 'https://i.ibb.co/gbnj5Qzw/symbol8.png', 
-        name: 'Symbole 8',
-        colorClass: 'symbol-8'
-      },
-      { 
-        type: 'symbol9', 
-        image: 'https://i.ibb.co/DfDvmC8T/IMG-6585.png', 
-        name: 'Symbole 9',
-        colorClass: 'symbol-9'
-      },
-      { 
-        type: 'symbol10', 
-        image: 'https://i.ibb.co/2YpQxB1Y/IMG-6620.png', 
-        name: 'Symbole 10',
-        colorClass: 'symbol-10'
-      },
-      { 
-        type: 'symbol11', 
-        image: 'https://i.ibb.co/0pM1D3wm/IMG-7123.png', 
-        name: 'Symbole 11',
-        colorClass: 'symbol-11'
+    // Système audio corrigé
+    function initAudioContext() {
+      try {
+        if (!audioContext) {
+          audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioContext.state === 'suspended') {
+          audioContext.resume();
+        }
+        return audioContext;
+      } catch (e) {
+        return null;
       }
-    ];
+    }
 
-    // Éléments DOM
-    const lockContainer = document.getElementById('lockContainer');
-    const spinBtn = document.getElementById('spinBtn');
-    const speedBtn = document.getElementById('speedBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const clearBtn = document.getElementById('clearBtn');
-    const resetRewardsBtn = document.getElementById('resetRewardsBtn'); // NOUVEAU : Bouton de réinitialisation des récompenses
-    const message = document.getElementById('message');
-    const resultContainer = document.getElementById('resultContainer');
-    const attemptsCount = document.getElementById('attemptsCount');
-    const currentGameAttemptsElement = document.getElementById('currentGameAttempts');
-    const rosesCountElement = document.getElementById('rosesCount');
-    const nextBonusElement = document.getElementById('nextBonus');
-    const jackpotAmountElement = document.getElementById('jackpotAmount');
-    const jackpotDisplay = document.getElementById('jackpotDisplay');
-    const jackpotInfo = document.getElementById('jackpotInfo');
-    const attemptsResult = document.getElementById('attemptsResult');
-    const winMessage = document.getElementById('winMessage');
-    const winningSymbolElement = document.getElementById('winningSymbol');
-    const jackpotWinElement = document.getElementById('jackpotWin');
-    const speedIndicator = document.getElementById('speedIndicator');
-    const gainsTableContainer = document.getElementById('gainsTableContainer');
-    const remainingTurnsValue = document.getElementById('remainingTurnsValue');
-    const remainingTurnsProgress = document.getElementById('remainingTurnsProgress');
-    
-    // NOUVEAU : Éléments DOM pour le système de drop
-    const dropPoolValue = document.getElementById('dropPoolValue');
-    const dropPoolInfo = document.getElementById('dropPoolInfo');
-    
-    // NOUVEAU : Éléments DOM pour les boutons supplémentaires
-    const superSpeedBtn = document.getElementById('superSpeedBtn');
-    const ultraSpeedBtn = document.getElementById('ultraSpeedBtn');
-    const slowLightsBtn = document.getElementById('slowLightsBtn');
-    const fastLightsBtn = document.getElementById('fastLightsBtn');
-    const increaseJackpotBtn = document.getElementById('increaseJackpotBtn');
-    const decreaseJackpotBtn = document.getElementById('decreaseJackpotBtn');
-    const setJackpotBtn = document.getElementById('setJackpotBtn');
+    function createSound(frequency, duration, type = 'sine', volume = 0.15) {
+      const context = initAudioContext();
+      if (!context) return;
 
-    // Fonction pour jouer le son des symboles
-    function playSymbolSound() {
-      if (!symbolSoundPlaying) {
-        symbolSoundPlaying = true;
-        symbolSound.currentTime = 0;
-        symbolSound.play().catch(e => console.log("Erreur de lecture du son des symboles:", e));
+      try {
+        const oscillator = context.createOscillator();
+        const gainNode = context.createGain();
         
-        symbolSound.onended = () => {
-          symbolSoundPlaying = false;
-        };
-      }
-    }
-
-    // Fonction pour jouer le son de rotation
-    function playSpinSound() {
-      if (!spinSoundPlaying) {
-        spinSoundPlaying = true;
-        spinSound.currentTime = 0;
-        spinSound.play().catch(e => console.log("Erreur de lecture du son de rotation:", e));
+        oscillator.connect(gainNode);
+        gainNode.connect(context.destination);
         
-        spinSound.onended = () => {
-          spinSoundPlaying = false;
-        };
-      }
-    }
-
-    // Initialisation du jeu
-    function initGame() {
-      // Ne PAS réinitialiser attempts (compteur total)
-      // Ne PAS réinitialiser rosesCount (roses totales)
-      // Ne PAS réinitialiser gainsHistory (historique)
-      // Ne PAS réinitialiser dropPool (pool de drop)
-      
-      currentGameAttempts = 0; // Réinitialiser seulement le compteur de la partie en cours
-      jackpotAmount = 250; // Toujours commencer à 250
-      bonusCounter = 0;
-      remainingTurns = 0;
-      symbols = Array(currentDifficulty).fill(0).map(() => getRandomSymbol());
-      updateDisplay();
-      updateStats();
-      updateRemainingTurns();
-      resultContainer.classList.add('hidden');
-      message.textContent = `Nouvelle partie ! Le jackpot commence à 250 roses. Alignez ${currentDifficulty} symboles identiques !`;
-      spinBtn.disabled = false;
-      removeWinClasses();
-      updateJackpotDisplay();
-    }
-
-    // Mettre à jour les statistiques
-    function updateStats() {
-      attemptsCount.textContent = attempts; // Compteur total
-      currentGameAttemptsElement.textContent = currentGameAttempts; // Compteur de la partie
-      rosesCountElement.textContent = rosesCount; // Roses totales
-      nextBonusElement.textContent = 30 - (bonusCounter % 30); // CORRECTION : 30 tours au lieu de 20
-      
-      // Sauvegarder après chaque mise à jour (sans notification)
-      saveGame(false);
-    }
-
-    // NOUVEAU : Mettre à jour l'affichage du pool de drop
-    function updateDropPoolDisplay() {
-      dropPoolValue.textContent = `${dropPool} pièces`;
-      
-      if (dropPool > 0) {
-        dropPoolInfo.textContent = `Chance de 1/500 de gagner ${dropPool} pièces`;
-      } else {
-        dropPoolInfo.textContent = `Chance de 1/500 de gagner des pièces`;
-      }
-    }
-
-    // Mettre à jour l'affichage du compteur de tours restants
-    function updateRemainingTurns() {
-      if (remainingTurns > 0) {
-        remainingTurnsValue.textContent = `${remainingTurns} tour${remainingTurns > 1 ? 's' : ''}`;
+        oscillator.frequency.value = frequency;
+        oscillator.type = type;
         
-        // Mettre à jour la barre de progression
-        const progressPercentage = (remainingTurns / attackMode) * 100;
-        remainingTurnsProgress.style.width = `${progressPercentage}%`;
-      } else {
-        remainingTurnsValue.textContent = '0';
-        remainingTurnsProgress.style.width = '0%';
+        gainNode.gain.setValueAtTime(volume, context.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, context.currentTime + duration);
+        
+        oscillator.start(context.currentTime);
+        oscillator.stop(context.currentTime + duration);
+      } catch (e) {
+        // Silence en cas d'erreur
       }
     }
 
-    // Mettre à jour l'affichage du jackpot
-    function updateJackpotDisplay() {
-      jackpotAmountElement.textContent = `${jackpotAmount} 🌹`;
+    function playHitSound() {
+      createSound(800, 0.1, 'square');
+      setTimeout(() => createSound(400, 0.05, 'triangle'), 50);
+    }
+
+    function playCrackSound() {
+      createSound(200, 0.3, 'sawtooth');
+      setTimeout(() => createSound(150, 0.2, 'sawtooth'), 100);
+    }
+
+    function playBreakSound() {
+      createSound(100, 0.5, 'sawtooth');
+      setTimeout(() => createSound(300, 0.3, 'square'), 100);
+      setTimeout(() => createSound(600, 0.2, 'sine'), 200);
+    }
+
+    function playJackpotSound() {
+      createSound(523, 0.1, 'sine', 0.2);
+      setTimeout(() => createSound(659, 0.1, 'sine', 0.2), 100);
+      setTimeout(() => createSound(784, 0.1, 'sine', 0.2), 200);
+      setTimeout(() => createSound(1047, 0.3, 'sine', 0.3), 300);
+    }
+
+    // Fonction pour créer des particules d'impact
+    function createHitParticles() {
+      for (let i = 0; i < 8; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const brickRect = brick.getBoundingClientRect();
+        const containerRect = brick.parentElement.getBoundingClientRect();
+        
+        particle.style.left = (brickRect.left + brickRect.width/2 - containerRect.left + (Math.random() * 60 - 30)) + 'px';
+        particle.style.top = (brickRect.top + brickRect.height/2 - containerRect.top + (Math.random() * 60 - 30)) + 'px';
+        
+        particlesContainer.appendChild(particle);
+        
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 30 + Math.random() * 40;
+        
+        particle.animate([
+          {
+            transform: 'scale(1)',
+            opacity: 1
+          },
+          {
+            transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
+            opacity: 0
+          }
+        ], {
+          duration: 500 + Math.random() * 300,
+          easing: 'ease-out'
+        }).onfinish = () => particle.remove();
+      }
+    }
+
+    // Fonction pour animer l'attaque spéciale
+    function animateSpecialAttack() {
+      // Créer l'élément d'attaque spéciale s'il n'existe pas
+      if (!specialAttack.style.backgroundImage) {
+        specialAttack.style.backgroundImage = "url('https://i.gifer.com/37Ft.gif')";
+        specialAttack.style.backgroundSize = "contain";
+        specialAttack.style.backgroundRepeat = "no-repeat";
+        specialAttack.style.backgroundPosition = "center";
+      }
       
-      if (jackpotAmount >= 1000) {
-        jackpotDisplay.classList.remove('jackpot-hidden');
-        jackpotDisplay.classList.add('jackpot-visible');
-        jackpotInfo.textContent = `Jackpot progressif ! Gagnez ${jackpotAmount} roses !`;
-      } else {
-        jackpotDisplay.classList.remove('jackpot-visible');
-        jackpotDisplay.classList.add('jackpot-hidden');
-        jackpotInfo.textContent = `Jackpot visible à partir de 1000 roses`;
+      // Activer l'animation
+      specialAttack.classList.add('active');
+      
+      // Désactiver l'animation après qu'elle soit terminée
+      setTimeout(() => {
+        specialAttack.classList.remove('active');
+      }, 1000);
+    }
+
+    // Fonction pour animer Mario qui saute
+    function animateMarioJump() {
+      mario.classList.add('jumping');
+      
+      // Retirer la classe après l'animation
+      setTimeout(() => {
+        mario.classList.remove('jumping');
+      }, 600);
+    }
+
+    function createImpactEffect() {
+      const effect = document.createElement('div');
+      effect.className = 'impact-effect';
+      effect.textContent = impactEffects[Math.floor(Math.random() * impactEffects.length)];
+      effect.style.left = (Math.random() * 70 + 15) + '%';
+      effect.style.top = (Math.random() * 50 + 25) + '%';
+      
+      document.querySelector('.brick-container').appendChild(effect);
+      
+      setTimeout(() => {
+        effect.remove();
+      }, 1000);
+    }
+
+    function updateCombo() {
+      const currentTime = Date.now();
+      if (currentTime - lastHitTime > 2000) {
+        combo = 0;
+      }
+      combo++;
+      lastHitTime = currentTime;
+      
+      if (combo >= 3) {
+        comboIndicator.textContent = `COMBO x${combo}`;
+        comboIndicator.style.display = 'block';
       }
     }
 
-    // Mettre à jour le tableau des gains
-    function updateGainsTable() {
-      if (gainsHistory.length === 0) {
-        gainsTableContainer.innerHTML = '<div class="no-gains">Aucun jackpot gagné pour le moment</div>';
+    // Fonction pour mettre à jour le jackpot
+    function updateJackpot() {
+      jackpotAmountElement.textContent = jackpotAmount.toLocaleString() + " 🌹";
+      jackpotProgressBar.style.width = jackpotProgress + "%";
+    }
+
+    // Fonction pour mettre à jour le tableau des gains
+    function updateWinnersTable() {
+      winnersList.innerHTML = '';
+      
+      if (recentWinners.length === 0) {
+        winnersList.innerHTML = '<div class="winner-item"><span class="winner-name">Aucun gain récent</span></div>';
         return;
       }
-
-      let tableHTML = `
-        <table class="gains-table">
-          <thead>
-            <tr>
-              <th>N°</th>
-              <th>Date</th>
-              <th>Tours</th>
-              <th>Type</th>
-              <th>Gain</th>
-            </tr>
-          </thead>
-          <tbody>
-      `;
-
-      // Afficher les 10 derniers gains (ou moins s'il y en a moins de 10)
-      const recentGains = gainsHistory.slice(-10).reverse();
-      recentGains.forEach((gain, index) => {
-        const gainNumber = gainsHistory.length - index;
-        const dateDisplay = gain.date ? gain.date.split(' ')[0] : '-';
-        
-        // CORRECTION : Afficher le bon nombre de symboles dans l'historique
-        let gainType;
-        if (gain.type === 'drop') {
-          gainType = 'DROP';
-        } else if (gain.symbolCount) {
-          gainType = `${gain.symbolCount} symboles identiques`;
-        } else {
-          gainType = gain.symbole || '-';
-        }
-        
-        const gainAmount = gain.type === 'drop' 
-          ? `<span class="drop-amount">${gain.amount} pièces</span>` 
-          : `<span class="gain-amount">${gain.roses} 🌹</span>`;
-          
-        tableHTML += `
-          <tr>
-            <td>#${gainNumber}</td>
-            <td style="font-size: 0.85em;">${dateDisplay}</td>
-            <td>${gain.tours}</td>
-            <td>${gainType}</td>
-            <td>${gainAmount}</td>
-          </tr>
+      
+      recentWinners.forEach(winner => {
+        const winnerItem = document.createElement('div');
+        winnerItem.className = 'winner-item';
+        winnerItem.innerHTML = `
+          <span class="winner-name">${winner.name}</span>
+          <span class="winner-amount">${winner.amount.toLocaleString()} 🌹</span>
         `;
-      });
-
-      tableHTML += '</tbody></table>';
-      
-      if (gainsHistory.length > 10) {
-        tableHTML += `<div style="text-align: center; color: #feca57; margin-top: 10px; font-size: 0.9em;">
-          Affichage des 10 derniers gains (${gainsHistory.length} au total)
-        </div>`;
-      }
-      
-      gainsTableContainer.innerHTML = tableHTML;
-    }
-
-    // Obtenir un symbole aléatoire
-    function getRandomSymbol() {
-      return Math.floor(Math.random() * symbolTypes.length);
-    }
-
-    // Mise à jour de l'affichage des symboles
-    function updateDisplay() {
-      lockContainer.innerHTML = '';
-      
-      symbols.forEach((symbolIndex, index) => {
-        const symbolElement = document.createElement('div');
-        symbolElement.className = `symbol-wheel ${symbolTypes[symbolIndex].colorClass}`;
-        symbolElement.id = `symbol${index + 1}`;
-        
-        const symbolData = symbolTypes[symbolIndex];
-        const img = document.createElement('img');
-        img.src = symbolData.image;
-        img.alt = symbolData.name;
-        img.className = 'symbol-image';
-        symbolElement.appendChild(img);
-        
-        lockContainer.appendChild(symbolElement);
+        winnersList.appendChild(winnerItem);
       });
     }
 
-    // Supprimer les classes de victoire
-    function removeWinClasses() {
-      document.querySelectorAll('.symbol-wheel').forEach(symbol => {
-        symbol.classList.remove('winning');
-        symbol.classList.remove('partial-win');
-        symbol.classList.remove('spinning');
-        symbol.classList.remove('fast-spin');
+    // Fonction pour vérifier si le jackpot est gagné
+    function checkJackpot() {
+      // Vérifier si on a atteint 100 coups pour ajouter 5 roses au jackpot
+      if (jackpotHitsCounter >= 100) {
+        jackpotAmount += 5;
+        jackpotHitsCounter = 0;
+        jackpotProgress = 0;
         
-        symbolTypes.forEach((sym, index) => {
-          symbol.classList.remove(sym.colorClass);
-        });
+        // Mettre à jour l'affichage
+        updateJackpot();
         
-        const currentSymbol = symbols[parseInt(symbol.id.replace('symbol', '')) - 1];
-        if (currentSymbol !== undefined) {
-          symbol.classList.add(symbolTypes[currentSymbol].colorClass);
+        // Vérifier si on gagne le jackpot (1 chance sur 5 millions)
+        if (Math.random() < 1/5000000) {
+          winJackpot();
         }
-      });
-    }
-
-    // Vérifier la victoire et compter les symboles identiques
-    function checkWin() {
-      const firstSymbol = symbols[0];
-      for (let i = 1; i < symbols.length; i++) {
-        if (symbols[i] !== firstSymbol) {
-          return false;
-        }
-      }
-      
-      lastWinningSymbol = firstSymbol;
-      return true;
-    }
-
-    // Compter le nombre de symboles identiques et identifier les positions
-    function countMatchingSymbols() {
-      const symbolCounts = {};
-      const symbolPositions = {};
-      
-      // Compter les occurrences de chaque symbole
-      symbols.forEach((symbolIndex, position) => {
-        const symbolName = symbolTypes[symbolIndex].name;
-        symbolCounts[symbolName] = (symbolCounts[symbolName] || 0) + 1;
-        
-        if (!symbolPositions[symbolName]) {
-          symbolPositions[symbolName] = [];
-        }
-        symbolPositions[symbolName].push(position);
-      });
-      
-      // Trouver le symbole avec le plus d'occurrences
-      let maxCount = 0;
-      let maxSymbol = null;
-      let maxPositions = [];
-      
-      for (const [symbolName, count] of Object.entries(symbolCounts)) {
-        if (count > maxCount) {
-          maxCount = count;
-          maxSymbol = symbolName;
-          maxPositions = symbolPositions[symbolName];
-        }
-      }
-      
-      return {
-        count: maxCount,
-        symbol: maxSymbol,
-        positions: maxPositions
-      };
-    }
-
-    // CORRECTION : Mettre en évidence les symboles identiques avec les bonnes valeurs
-    function highlightMatchingSymbols() {
-      const symbolGroups = {};
-      
-      // Grouper les symboles par type
-      symbols.forEach((symbolIndex, position) => {
-        const symbolType = symbolIndex;
-        if (!symbolGroups[symbolType]) {
-          symbolGroups[symbolType] = [];
-        }
-        symbolGroups[symbolType].push(position);
-      });
-      
-      // Supprimer d'abord toutes les classes de victoire partielles
-      document.querySelectorAll('.symbol-wheel').forEach(symbol => {
-        symbol.classList.remove('partial-win');
-      });
-      
-      // Appliquer la classe partial-win à TOUS les groupes de 4 symboles ou plus
-      Object.values(symbolGroups).forEach(positions => {
-        if (positions.length >= 4) {
-          positions.forEach(position => {
-            const symbolElement = document.getElementById(`symbol${position + 1}`);
-            if (symbolElement) {
-              symbolElement.classList.add('partial-win');
-            }
-          });
-        }
-      });
-    }
-
-    // CORRECTION : Gérer le bonus de roses - UNIQUEMENT tous les 30 tours
-    function handleRoseBonus() {
-      bonusCounter++;
-      
-      // CORRECTION : Ajouter une rose seulement tous les 30 tours (au lieu de 20)
-      if (bonusCounter % 30 === 0) {
-        rosesCount += 1;
-        jackpotAmount += 1;
-        message.textContent = `🌹 +1 rose ajoutée au jackpot !`;
-        
-        updateStats();
-        updateJackpotDisplay();
-      }
-    }
-
-    // NOUVEAU : Gérer le système de drop
-    function handleDropSystem() {
-      // Incrémenter le compteur de drop
-      dropCounter++;
-      
-      // Ajouter 10 pièces au pool tous les 100 tours
-      if (dropCounter % 100 === 0) {
-        dropPool += 10;
-        message.textContent = `💰 +10 pièces ajoutées au pool de drop ! Pool actuel: ${dropPool} pièces`;
-        updateDropPoolDisplay();
-      }
-      
-      // Chance de 1 sur 500 de gagner les pièces du pool
-      if (dropPool > 0 && Math.random() < 1/500) {
-        const coinsWon = dropPool;
-        rosesCount += coinsWon;
-        jackpotAmount += coinsWon;
-        
-        // Ajouter le drop à l'historique des gains
-        gainsHistory.push({
-          type: 'drop',
-          tours: currentGameAttempts,
-          amount: coinsWon,
-          date: new Date().toLocaleString('fr-FR')
-        });
-        
-        // Mettre à jour le tableau des gains
-        updateGainsTable();
-        
-        // Afficher l'animation de drop
-        showDropAnimation(coinsWon);
-        
-        // Réinitialiser le pool
-        dropPool = 0;
-        updateDropPoolDisplay();
-        updateStats();
-        updateJackpotDisplay();
-        
-        return true;
-      }
-      
-      return false;
-    }
-
-    // NOUVEAU : Afficher l'animation de drop
-    function showDropAnimation(coinsWon) {
-      const dropAnimation = document.createElement('div');
-      dropAnimation.className = 'drop-animation';
-      
-      dropAnimation.innerHTML = `
-        <div class="drop-popup">
-          <div class="drop-popup-icon">
-            <img src="https://i.ibb.co/7JsBRrCn/IMG-5885.png" alt="Pièces" style="width: 80px; height: 80px;">
-          </div>
-          <div class="drop-popup-title">DROP GAGNÉ !</div>
-          <div class="drop-popup-description">Vous avez remporté ${coinsWon} pièces du pool de drop !</div>
-          <button class="drop-close">CONTINUER</button>
-        </div>
-      `;
-      
-      document.body.appendChild(dropAnimation);
-      
-      const closeButton = dropAnimation.querySelector('.drop-close');
-      closeButton.addEventListener('click', () => {
-        document.body.removeChild(dropAnimation);
-      });
-      
-      setTimeout(() => {
-        if (document.body.contains(dropAnimation)) {
-          document.body.removeChild(dropAnimation);
-        }
-      }, 5000);
-    }
-
-    // NOUVEAU : Afficher le popup pour 4 ou 5 symboles
-    function showPartialWinPopup(symbolCount, rosesWon) {
-      const partialWinPopup = document.createElement('div');
-      partialWinPopup.className = 'partial-win-popup';
-      
-      let title, description;
-      
-      if (symbolCount === 4) {
-        title = "4 SYMBOLES IDENTIQUES !";
-        description = `Vous avez aligné 4 symboles identiques et gagné ${rosesWon} roses !`;
       } else {
-        title = "5 SYMBOLES IDENTIQUES !";
-        description = `Vous avez aligné 5 symboles identiques et gagné ${rosesWon} roses !`;
+        // Mettre à jour la progression
+        jackpotProgress = (jackpotHitsCounter / 100) * 100;
+        updateJackpot();
       }
+    }
+
+    // Fonction pour gagner le jackpot
+    function winJackpot() {
+      playJackpotSound();
       
-      partialWinPopup.innerHTML = `
-        <div class="partial-win-content">
-          <div class="partial-win-icon">
-            <img src="https://i.ibb.co/WNXDxn2y/IMG-7354-Photoroom.png" alt="Roses" style="width: 80px; height: 80px;">
-          </div>
-          <div class="partial-win-title">${title}</div>
-          <div class="partial-win-description">${description}</div>
-          <button class="partial-win-close">CONTINUER</button>
-        </div>
-      `;
-      
-      document.body.appendChild(partialWinPopup);
-      
-      const closeButton = partialWinPopup.querySelector('.partial-win-close');
-      closeButton.addEventListener('click', () => {
-        document.body.removeChild(partialWinPopup);
+      // Ajouter le gagnant à la liste
+      const playerName = "Joueur " + Math.floor(Math.random() * 1000);
+      recentWinners.unshift({
+        name: playerName,
+        amount: jackpotAmount
       });
       
-      setTimeout(() => {
-        if (document.body.contains(partialWinPopup)) {
-          document.body.removeChild(partialWinPopup);
-        }
-      }, 5000);
-    }
-
-    // Animation de rotation de tous les symboles simultanément
-    function spinAllSymbolsSimultaneously() {
-      return new Promise(resolve => {
-        // Activer l'animation de rotation sur tous les symboles
-        document.querySelectorAll('.symbol-wheel').forEach(symbolElement => {
-          if (isUltraSpeedMode) {
-            symbolElement.classList.add('spinning', 'fast-spin');
-          } else if (isSuperSpeedMode || isFastMode) {
-            symbolElement.classList.add('spinning');
-          } else {
-            symbolElement.classList.add('spinning');
-          }
-        });
-        
-        let spins = 0;
-        let maxSpins, spinInterval;
-        
-        // Déterminer la vitesse en fonction du mode
-        if (isUltraSpeedMode) {
-          maxSpins = 3 + Math.floor(Math.random() * 3);
-          spinInterval = 10;
-        } else if (isSuperSpeedMode) {
-          maxSpins = 5 + Math.floor(Math.random() * 5);
-          spinInterval = 20;
-        } else if (isFastMode) {
-          maxSpins = 5 + Math.floor(Math.random() * 5);
-          spinInterval = 30;
-        } else {
-          maxSpins = 10 + Math.floor(Math.random() * 10);
-          spinInterval = 100;
-        }
-        
-        const spinIntervalId = setInterval(() => {
-          // Changer tous les symboles en même temps
-          for (let i = 0; i < symbols.length; i++) {
-            symbols[i] = getRandomSymbol();
-            updateSingleSymbol(i);
-          }
-          
-          spins++;
-          
-          if (spins >= maxSpins) {
-            clearInterval(spinIntervalId);
-            // Arrêter l'animation de rotation sur tous les symboles
-            document.querySelectorAll('.symbol-wheel').forEach(symbolElement => {
-              symbolElement.classList.remove('spinning', 'fast-spin');
-            });
-            
-            let delay;
-            if (isUltraSpeedMode) delay = 10;
-            else if (isSuperSpeedMode) delay = 15;
-            else if (isFastMode) delay = 20;
-            else delay = 100;
-            
-            setTimeout(resolve, delay);
-          }
-        }, spinInterval);
-      });
-    }
-
-    // Mettre à jour un seul symbole
-    function updateSingleSymbol(index) {
-      const symbolElement = document.getElementById(`symbol${index + 1}`);
-      if (!symbolElement) return;
-      
-      symbolTypes.forEach(sym => {
-        symbolElement.classList.remove(sym.colorClass);
-      });
-      
-      const symbolData = symbolTypes[symbols[index]];
-      symbolElement.classList.add(symbolData.colorClass);
-      
-      symbolElement.innerHTML = '';
-      const img = document.createElement('img');
-      img.src = symbolData.image;
-      img.alt = symbolData.name;
-      img.className = 'symbol-image';
-      symbolElement.appendChild(img);
-    }
-
-    // Basculer le mode accéléré
-    function toggleSpeedMode() {
-      isFastMode = !isFastMode;
-      
-      if (isFastMode) {
-        speedBtn.classList.add('active');
-        speedBtn.innerHTML = '⏩ Ralenti';
-        speedIndicator.style.display = 'block';
-        message.textContent = 'Mode accéléré activé !';
-      } else {
-        speedBtn.classList.remove('active');
-        speedBtn.innerHTML = '⏩ Accélérer';
-        speedIndicator.style.display = 'none';
-        message.textContent = 'Mode normal activé';
+      // Garder seulement les 5 derniers gains
+      if (recentWinners.length > 5) {
+        recentWinners = recentWinners.slice(0, 5);
       }
-    }
-
-    // NOUVEAU : Activer/désactiver le mode super vitesse
-    function toggleSuperSpeedMode() {
-      isSuperSpeedMode = !isSuperSpeedMode;
-      
-      if (isSuperSpeedMode) {
-        superSpeedBtn.classList.add('active');
-        isFastMode = false;
-        speedBtn.classList.remove('active');
-        speedBtn.innerHTML = '⏩ Accélérer';
-        speedIndicator.style.display = 'none';
-        message.textContent = 'Mode super vitesse activé !';
-      } else {
-        superSpeedBtn.classList.remove('active');
-        message.textContent = 'Mode normal activé';
-      }
-    }
-
-    // NOUVEAU : Activer/désactiver le mode ultra vitesse
-    function toggleUltraSpeedMode() {
-      isUltraSpeedMode = !isUltraSpeedMode;
-      
-      if (isUltraSpeedMode) {
-        ultraSpeedBtn.classList.add('active');
-        isFastMode = false;
-        isSuperSpeedMode = false;
-        superSpeedBtn.classList.remove('active');
-        speedBtn.classList.remove('active');
-        speedBtn.innerHTML = '⏩ Accélérer';
-        speedIndicator.style.display = 'none';
-        message.textContent = 'Mode ultra vitesse activé !';
-      } else {
-        ultraSpeedBtn.classList.remove('active');
-        message.textContent = 'Mode normal activé';
-      }
-    }
-
-    // NOUVEAU : Modifier la vitesse des lumières
-    function setLightSpeed(speed) {
-      lightSpeed = speed;
-      
-      // Mettre à jour l'animation de la bordure
-      const gameContainer = document.querySelector('.game-container');
-      gameContainer.style.animationDuration = `${lightSpeed}s`;
-      
-      // Mettre à jour l'état des boutons
-      if (speed === 5) {
-        slowLightsBtn.classList.add('active');
-        fastLightsBtn.classList.remove('active');
-        message.textContent = 'Vitesse des lumières réglée sur lent';
-      } else {
-        slowLightsBtn.classList.remove('active');
-        fastLightsBtn.classList.add('active');
-        message.textContent = 'Vitesse des lumières réglée sur rapide';
-      }
-    }
-
-    // NOUVEAU : Modifier le jackpot
-    function modifyJackpot(amount) {
-      jackpotAmount = amount;
-      updateJackpotDisplay();
-      updateStats();
-      message.textContent = `Jackpot modifié à ${jackpotAmount} roses !`;
-    }
-
-    // NOUVEAU : Définir le jackpot manuellement
-    function setJackpotManually() {
-      const newAmount = prompt('Entrez le nouveau montant du jackpot :', jackpotAmount);
-      if (newAmount !== null) {
-        const amount = parseInt(newAmount);
-        if (!isNaN(amount) && amount >= 0) {
-          modifyJackpot(amount);
-        } else {
-          message.textContent = 'Veuillez entrer un nombre valide !';
-        }
-      }
-    }
-
-    // Afficher la récompense
-    function showReward() {
-      const rewardAnimation = document.createElement('div');
-      rewardAnimation.className = 'reward-animation';
-      
-      rewardAnimation.innerHTML = `
-        <div class="reward-popup">
-          <div class="reward-popup-icon">
-            <img src="${symbolTypes[lastWinningSymbol].image}" alt="${symbolTypes[lastWinningSymbol].name}" style="width: 100px; height: 100px;">
-          </div>
-          <div class="reward-popup-title">JACKPOT GAGNÉ !</div>
-          <div class="reward-popup-description">Vous avez remporté ${jackpotAmount} roses !</div>
-          <button class="reward-close">CONTINUER</button>
-        </div>
-      `;
-      
-      document.body.appendChild(rewardAnimation);
-      
-      const closeButton = rewardAnimation.querySelector('.reward-close');
-      closeButton.addEventListener('click', () => {
-        document.body.removeChild(rewardAnimation);
-      });
-      
-      setTimeout(() => {
-        if (document.body.contains(rewardAnimation)) {
-          document.body.removeChild(rewardAnimation);
-        }
-      }, 7000);
-    }
-
-    // Tourner tous les symboles
-    async function spinAllSymbols() {
-      if (isSpinning) return;
-      
-      isSpinning = true;
-      spinBtn.disabled = true;
-      message.textContent = "Les rouleaux tournent...";
-      
-      // Supprimer les classes de victoire partielles avant de commencer
-      removeWinClasses();
-      
-      // Jouer le son de rotation
-      playSpinSound();
-      
-      // Initialiser le compteur de tours restants
-      remainingTurns = attackMode;
-      updateRemainingTurns();
-      
-      for (let coup = 0; coup < attackMode; coup++) {
-        // Faire tourner tous les symboles en même temps
-        await spinAllSymbolsSimultaneously();
-        
-        attempts++;
-        currentGameAttempts++;
-        
-        // Mettre à jour le compteur de tours restants
-        remainingTurns = attackMode - coup - 1;
-        updateRemainingTurns();
-        
-        // CORRECTION : Gérer le bonus de roses (uniquement tous les 30 tours)
-        handleRoseBonus();
-        
-        // NOUVEAU : Gérer le système de drop
-        const dropWon = handleDropSystem();
-        
-        updateStats();
-        
-        // Vérifier la victoire
-        if (checkWin()) {
-          playSymbolSound(); // Son joué uniquement lors d'une victoire
-          await winGame();
-          break;
-        } else {
-          // Vérifier s'il y a des symboles identiques (4 ou 5) - CORRECTION
-          const matchingInfo = countMatchingSymbols();
-          if (matchingInfo.count >= 4 && !dropWon) {
-            // CORRECTION : Utiliser le bon nombre de symboles dans le message
-            message.textContent = `🎉 ${matchingInfo.count} symboles identiques ! 🎉`;
-            playSymbolSound();
-            
-            // Mettre en évidence les symboles correspondants
-            highlightMatchingSymbols();
-            
-            // CORRECTION : Ajouter à l'historique des gains pour les combinaisons partielles
-            if (matchingInfo.count >= 4) {
-              const partialGainAmount = calculatePartialGain(matchingInfo.count);
-              
-              // Ajouter les roses au total et au jackpot
-              rosesCount += partialGainAmount;
-              jackpotAmount += partialGainAmount;
-              
-              // Ajouter à l'historique des gains
-              gainsHistory.push({
-                type: 'partial',
-                tours: currentGameAttempts,
-                symbolCount: matchingInfo.count,
-                roses: partialGainAmount,
-                date: new Date().toLocaleString('fr-FR')
-              });
-              
-              // Afficher le popup pour 4 ou 5 symboles
-              showPartialWinPopup(matchingInfo.count, partialGainAmount);
-              
-              updateStats();
-              updateJackpotDisplay();
-              updateGainsTable();
-            }
-            
-            // Attendre un peu pour que le joueur puisse voir les symboles dorés
-            let delay;
-            if (isUltraSpeedMode) delay = 200;
-            else if (isSuperSpeedMode) delay = 300;
-            else if (isFastMode) delay = 500;
-            else delay = 1000;
-            
-            await new Promise(resolve => setTimeout(resolve, delay));
-            
-            // Supprimer les classes de victoire partielles pour le prochain tour
-            removeWinClasses();
-          }
-        }
-        
-        if (coup < attackMode - 1) {
-          let delay;
-          if (isUltraSpeedMode) delay = 50;
-          else if (isSuperSpeedMode) delay = 75;
-          else if (isFastMode) delay = 100;
-          else delay = 300;
-          
-          await new Promise(resolve => setTimeout(resolve, delay));
-        }
-      }
-      
-      if (!checkWin()) {
-        const matchingInfo = countMatchingSymbols();
-        const maxCount = matchingInfo.count;
-        
-        if (maxCount >= 4) {
-          // CORRECTION : Utiliser le bon nombre de symboles dans le message
-          message.textContent = `Maximum ${maxCount} symboles identiques - Jackpot: ${jackpotAmount} roses`;
-        } else {
-          message.textContent = `Maximum ${maxCount} symboles identiques - Jackpot: ${jackpotAmount} roses`;
-        }
-      }
-      
-      isSpinning = false;
-      spinBtn.disabled = false;
-    }
-
-    // CORRECTION : Calculer le gain partiel pour 4 ou 5 symboles
-    function calculatePartialGain(symbolCount) {
-      switch(symbolCount) {
-        case 4: return 10; // 10 roses pour 4 symboles
-        case 5: return 50; // 50 roses pour 5 symboles
-        default: return 0;
-      }
-    }
-
-    // Gestion de la victoire
-    async function winGame() {
-      winAnimationActive = true;
-      const winningSymbol = symbolTypes[lastWinningSymbol];
-      message.textContent = `🎉 JACKPOT ! Vous avez aligné ${currentDifficulty} ${winningSymbol.name}s ! 🎉`;
-      
-      // Ajouter le gain à l'historique
-      gainsHistory.push({
-        type: 'jackpot',
-        tours: currentGameAttempts,
-        symbolCount: currentDifficulty,
-        roses: jackpotAmount,
-        date: new Date().toLocaleString('fr-FR')
-      });
-      
-      // Ajouter les roses au total
-      rosesCount += jackpotAmount;
-      
-      // Sauvegarder immédiatement après la victoire (avec notification)
-      saveGame(true);
       
       // Mettre à jour le tableau des gains
-      updateGainsTable();
-      updateStats();
+      updateWinnersTable();
       
-      for (let i = 0; i < currentDifficulty; i++) {
-        setTimeout(() => {
-          const symbolElement = document.getElementById(`symbol${i + 1}`);
-          if (symbolElement) symbolElement.classList.add('winning');
-        }, i * 200);
-      }
+      // Afficher la popup de victoire du jackpot
+      jackpotWinnerAmount.textContent = jackpotAmount.toLocaleString() + " 🌹";
+      jackpotWinner.classList.add('active');
       
-      winMessage.textContent = `Vous avez aligné ${currentDifficulty} ${winningSymbol.name}s !`;
-      attemptsResult.textContent = `Nombre de tours dans cette partie : ${currentGameAttempts}`;
-      winningSymbolElement.textContent = `Symbole gagnant : ${winningSymbol.name}`;
-      jackpotWinElement.textContent = `+ ${jackpotAmount} 🌹`;
+      // Réinitialiser le jackpot
+      jackpotAmount = 1000;
+      jackpotHitsCounter = 0;
+      jackpotProgress = 0;
+      updateJackpot();
       
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      resultContainer.classList.remove('hidden');
-      
-      showReward();
-      
-      setTimeout(() => {
-        winAnimationActive = false;
-      }, 5000);
+      // Sauvegarder après avoir gagné le jackpot
+      saveGameState();
     }
 
-    // Définir le mode d'attaque
+    // Fonction d'attaque CORRIGÉE avec protection anti-clics multiples
+    function attack() {
+      if (currentHP <= 0 || isAttacking) return;
+      
+      isAttacking = true;
+      
+      let hits = attackMode;
+      let actualHits = 0;
+      let rosesEarned = 0;
+      let wasCracked = brick.classList.contains('cracked');
+      
+      // Animer Mario qui saute
+      animateMarioJump();
+      
+      // Animer l'attaque spéciale pour les modes d'attaque élevés
+      if (attackMode >= 30) {
+        animateSpecialAttack();
+      }
+      
+      playHitSound();
+      createHitParticles();
+      createImpactEffect();
+      updateCombo();
+      
+      let animationType = 'hit';
+      let shakeType = 'screen-shake';
+      let animationDuration = 400;
+      
+      if (attackMode >= 1000) {
+        animationType = 'ultra-hit';
+        shakeType = 'ultra-shake';
+        animationDuration = 1200;
+      } else if (attackMode >= 500) {
+        animationType = 'mega-hit';
+        shakeType = 'mega-shake';
+        animationDuration = 1000;
+      } else if (attackMode >= 100) {
+        animationType = 'critical-hit';
+        shakeType = 'mega-shake';
+        animationDuration = 800;
+      } else if (attackMode >= 30) {
+        animationType = 'heavy-hit';
+        animationDuration = 600;
+      } else if (attackMode >= 10) {
+        animationType = 'heavy-hit';
+        animationDuration = 600;
+      }
+
+      brick.classList.add(animationType);
+      if (shakeType) gameContainer.classList.add(shakeType);
+      
+      for (let i = 0; i < hits && currentHP > 0; i++) {
+        coupCounter++;
+        actualHits++;
+        totalHits++;
+        jackpotHitsCounter++; // Incrémenter le compteur de coups pour le jackpot
+
+        // 1 coup = -1 point de vie
+        currentHP--;
+
+        hitsUntilCoin--;
+        if (hitsUntilCoin <= 0) {
+          rosesEarnedThisDiamond++;
+          rosesEarned++;
+          hitsUntilCoin = 4;
+        }
+      }
+      
+      // Vérifier si on gagne le jackpot
+      checkJackpot();
+      
+      if (rosesEarned > 0) {
+        showRoseGain(rosesEarned);
+      }
+      
+      updateUI();
+      
+      if (!wasCracked && brick.classList.contains('cracked')) {
+        playCrackSound();
+      }
+      
+      setTimeout(() => {
+        brick.classList.remove(animationType);
+        if (shakeType) gameContainer.classList.remove(shakeType);
+        isAttacking = false;
+        
+        if (currentHP <= 0) {
+          endGame();
+        }
+        
+        // Sauvegarder après chaque attaque
+        saveGameState();
+      }, animationDuration);
+    }
+
+    function showRoseGain(amount) {
+      const roseDisplay = document.createElement('div');
+      roseDisplay.className = 'coins-display';
+      roseDisplay.textContent = `+${amount} 🌹`;
+      brick.parentElement.appendChild(roseDisplay);
+      
+      setTimeout(() => {
+        roseDisplay.remove();
+      }, 1000);
+    }
+
+    function updateUI() {
+      // Mettre à jour le compteur de points de vie
+      hpValue.textContent = `${currentHP.toLocaleString()} / ${maxHP.toLocaleString()}`;
+      
+      let difficultyName = "";
+      switch(currentDifficulty) {
+        case "noob": difficultyName = "noob"; break;
+        case "buchette": difficultyName = "buchette"; break;
+        case "easy": difficultyName = "facile"; break;
+        case "medium": difficultyName = "moyen"; break;
+        case "hard": difficultyName = "difficile"; break;
+      }
+      
+      if (currentHP === 0) {
+        brick.className = "brick broken " + currentDifficulty;
+        message.textContent = "💥 La brique magique a été cassée !";
+      } else {
+        if (maxHP - currentHP >= maxHP * 0.7) {
+          brick.classList.add("cracked");
+          message.textContent = "⚠️ La brique magique commence à faiblir...";
+        } else {
+          brick.classList.remove("cracked");
+          message.textContent = `Brique magique ${difficultyName} - À tout moment la brique peut être cassée...`;
+        }
+      }
+    }
+
+    function showVictoryPopup() {
+      let rewardText = "";
+      let victoryText = "";
+      let rewardImg = "";
+      
+      // Déterminer la récompense selon la difficulté
+      switch(currentDifficulty) {
+        case "noob":
+          rewardText = "Vous avez gagné 300 pièces !";
+          victoryText = "Bravo ! Tu as gagné tes premières pièces !";
+          rewardImg = "https://i.ibb.co/gFMBxFzP/IMG-6063.png";
+          break;
+        case "buchette":
+          rewardText = "Vous avez gagné une galaxie !";
+          victoryText = "Incroyable ! Tu as découvert une galaxie entière !";
+          rewardImg = "https://i.ibb.co/JMPfpWV/IMG-5851.png";
+          break;
+        case "easy":
+          rewardText = "Vous avez gagné 3000 pièces !";
+          victoryText = "Félicitations ! Tu as remporté un superbe trésor !";
+          rewardImg = "https://i.ibb.co/p6s7HT5n/IMG-7322.png";
+          break;
+        case "medium":
+          rewardText = "Vous avez gagné 5000 pièces !";
+          victoryText = "Incroyable ! Tu as trouvé un trésor précieux !";
+          rewardImg = "https://i.ibb.co/hxXnkQh7/IMG-5861.png";
+          break;
+        case "hard":
+          rewardText = "Vous avez gagné 10000 pièces !";
+          victoryText = "Victoire totale ! Tu as remporté le jackpot !";
+          rewardImg = "https://i.ibb.co/DHBNtX7t/IMG-6573.png";
+          break;
+      }
+      
+      popupRewardImage.style.backgroundImage = `url('${rewardImg}')`;
+      
+      // Message de victoire clair et épuré
+      popupRewardText.innerHTML = `
+        <div class="difficulty-badge ${currentDifficulty}">NIVEAU ${currentDifficulty.toUpperCase()}</div><br>
+        <strong>RÉCOMPENSE :</strong><br>
+        ${rewardText}
+      `;
+      
+      popupVictoryMessage.textContent = victoryText;
+      
+      // Centrer la popup sur le jeu
+      const gameRect = gameContainer.getBoundingClientRect();
+      const popupContent = document.querySelector('.popup-content');
+      
+      // Positionner la popup au centre du jeu
+      victoryPopup.style.display = 'flex';
+      setTimeout(() => {
+        victoryPopup.classList.add('active');
+      }, 10);
+    }
+
+    function closeVictoryPopup() {
+      victoryPopup.classList.remove('active');
+      setTimeout(() => {
+        victoryPopup.style.display = 'none';
+      }, 300);
+    }
+
+    function closeJackpotPopup() {
+      jackpotWinner.classList.remove('active');
+    }
+
+    function endGame() {
+      playBreakSound();
+      
+      message.textContent = "💥 Félicitations ! Tu as cassé la brique magique ! 🎮✨";
+      
+      setTimeout(() => {
+        showVictoryPopup();
+      }, 500);
+      
+      comboIndicator.style.display = "none";
+      
+      // Sauvegarder à la fin du jeu
+      saveGameState();
+    }
+
     function setAttackMode(mode) {
       attackMode = mode;
       
-      document.querySelectorAll('.attack-mode-btn').forEach(btn => {
+      document.querySelectorAll('.attack-mode-image').forEach(btn => {
         btn.classList.remove('active');
       });
       
-      document.getElementById(`mode${mode}`).classList.add('active');
-      
-      spinBtn.textContent = `Tourner (${mode.toLocaleString()} tour${mode > 1 ? 's' : ''})`;
+      const btnEl = document.getElementById(`mode${mode}`);
+      if (btnEl) btnEl.classList.add('active');
+
+      attackBtn.textContent = `Attaquer (${mode} coup${mode > 1 ? 's' : ''})`;
     }
 
-    // Événements
-    spinBtn.addEventListener('click', spinAllSymbols);
-    speedBtn.addEventListener('click', toggleSpeedMode);
-    resetBtn.addEventListener('click', initGame);
-    clearBtn.addEventListener('click', clearSave);
-    resetRewardsBtn.addEventListener('click', resetRewards); // NOUVEAU : Événement pour réinitialiser les récompenses
+    function setDifficulty(difficulty) {
+      currentDifficulty = difficulty;
+      
+      // Mettre à jour l'apparence des boutons de difficulté
+      document.querySelectorAll('.difficulty-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector(`.difficulty-btn.${difficulty}`).classList.add('active');
+      
+      // Mettre à jour l'apparence de la brique
+      brick.className = "brick " + difficulty;
+      
+      // Réinitialiser le jeu avec la nouvelle difficulté
+      initGame();
+      
+      // Sauvegarder après changement de difficulté
+      saveGameState();
+    }
 
-    // NOUVEAU : Événements pour les boutons supplémentaires
-    superSpeedBtn.addEventListener('click', toggleSuperSpeedMode);
-    ultraSpeedBtn.addEventListener('click', toggleUltraSpeedMode);
-    slowLightsBtn.addEventListener('click', () => setLightSpeed(5));
-    fastLightsBtn.addEventListener('click', () => setLightSpeed(1));
-    increaseJackpotBtn.addEventListener('click', () => modifyJackpot(jackpotAmount + 100));
-    decreaseJackpotBtn.addEventListener('click', () => modifyJackpot(Math.max(0, jackpotAmount - 100)));
-    setJackpotBtn.addEventListener('click', setJackpotManually);
+    function initGame() {
+      // Définir les points de vie selon la difficulté
+      switch(currentDifficulty) {
+        case "noob":
+          maxHP = 1500;
+          break;
+        case "buchette":
+          maxHP = 5000;
+          break;
+        case "easy":
+          maxHP = 15000;
+          break;
+        case "medium":
+          maxHP = 25000;
+          break;
+        case "hard":
+          maxHP = 50000;
+          break;
+      }
+      
+      // Si on a chargé une sauvegarde, ne pas réinitialiser les HP
+      if (!loadGameState()) {
+        currentHP = maxHP;
+      }
+      
+      coupCounter = 0;
+      totalHits = 0;
+      hitsUntilCoin = 4;
+      rosesEarnedThisDiamond = 0;
+      combo = 0;
+      lastHitTime = 0;
+      isAttacking = false;
+      
+      brick.className = "brick " + currentDifficulty;
+      
+      let difficultyName = "";
+      switch(currentDifficulty) {
+        case "noob": difficultyName = "noob"; break;
+        case "buchette": difficultyName = "buchette"; break;
+        case "easy": difficultyName = "facile"; break;
+        case "medium": difficultyName = "moyen"; break;
+        case "hard": difficultyName = "difficile"; break;
+      }
+      message.textContent = `Brique magique ${difficultyName} - À tout moment la brique peut être cassée...`;
+      
+      // Fermer la popup si elle est ouverte
+      closeVictoryPopup();
+      comboIndicator.style.display = "none";
+
+      // reset des compteurs visibles (sécurité si tu veux les afficher autrement)
+      coupCounter = 0;
+      totalHits = 0;
+      hitsUntilCoin = 4;
+      
+      // Mettre à jour l'affichage des points de vie
+      updateUI();
+      
+      // Mettre à jour l'affichage du jackpot
+      updateJackpot();
+      updateWinnersTable();
+    }
+
+    // Fonction pour rendre le tableau des gains déplaçable
+    function makeElementDraggable(element) {
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      element.onmousedown = dragMouseDown;
+      
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // Obtenir la position de la souris au début du déplacement
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // Appeler une fonction chaque fois que la souris bouge
+        document.onmousemove = elementDrag;
+      }
+      
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // Calculer la nouvelle position
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // Définir la nouvelle position de l'élément
+        element.style.top = (element.offsetTop - pos2) + "px";
+        element.style.left = (element.offsetLeft - pos1) + "px";
+      }
+      
+      function closeDragElement() {
+        // Arrêter le déplacement lorsque le bouton de la souris est relâché
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+
+    // Événements CORRIGÉS
+    document.getElementById("attackBtn").addEventListener("click", attack);
+    document.getElementById("resetBtn").addEventListener("click", initGame);
 
     document.getElementById("mode1").addEventListener("click", () => setAttackMode(1));
     document.getElementById("mode10").addEventListener("click", () => setAttackMode(10));
     document.getElementById("mode30").addEventListener("click", () => setAttackMode(30));
     document.getElementById("mode100").addEventListener("click", () => setAttackMode(100));
+    document.getElementById("mode500").addEventListener("click", () => setAttackMode(500));
     document.getElementById("mode1000").addEventListener("click", () => setAttackMode(1000));
-    document.getElementById("mode2000").addEventListener("click", () => setAttackMode(2000));
-    document.getElementById("mode5000").addEventListener("click", () => setAttackMode(5000));
+
+    // Sélecteur de difficulté
+    document.querySelectorAll('.difficulty-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        setDifficulty(this.getAttribute('data-difficulty'));
+      });
+    });
+
+    // Fermer la popup
+    closePopupBtn.addEventListener('click', closeVictoryPopup);
+    jackpotCloseBtn.addEventListener('click', closeJackpotPopup);
+
+    // Fermer la popup en cliquant en dehors
+    victoryPopup.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeVictoryPopup();
+      }
+    });
+
+    jackpotWinner.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeJackpotPopup();
+      }
+    });
 
     // Raccourcis clavier
     document.addEventListener('keydown', (e) => {
-      if (e.key === ' ' || e.key === 'Enter') {
-        e.preventDefault();
-        if (!isSpinning && !winAnimationActive) {
-          spinAllSymbols();
-        }
-      }
+      if (isAttacking) return;
       
-      if (e.key === 'r' || e.key === 'R') {
-        initGame();
-      }
-      
-      if (e.key === 's' || e.key === 'S') {
-        toggleSpeedMode();
-      }
-      
-      if (e.key >= '1' && e.key <= '7') {
-        const modes = [1, 10, 30, 100, 1000, 2000, 5000];
-        const index = parseInt(e.key) - 1;
-        if (index < modes.length) {
-          setAttackMode(modes[index]);
-        }
+      switch(e.key) {
+        case ' ':
+        case 'Enter':
+          e.preventDefault();
+          attack();
+          break;
+        case '1':
+          setAttackMode(1);
+          break;
+        case '2':
+          setAttackMode(10);
+          break;
+        case '3':
+          setAttackMode(30);
+          break;
+        case '4':
+          setAttackMode(100);
+          break;
+        case '5':
+          setAttackMode(500);
+          break;
+        case '6':
+          setAttackMode(1000);
+          break;
+        case 'r':
+        case 'R':
+          initGame();
+          break;
+        case 'n':
+        case 'N':
+          setDifficulty('noob');
+          break;
+        case 'b':
+        case 'B':
+          setDifficulty('buchette');
+          break;
+        case 'e':
+        case 'E':
+          setDifficulty('easy');
+          break;
+        case 'm':
+        case 'M':
+          setDifficulty('medium');
+          break;
+        case 'd':
+        case 'D':
+          setDifficulty('hard');
+          break;
+        case 'Escape':
+          closeVictoryPopup();
+          closeJackpotPopup();
+          break;
       }
     });
 
-    // Initialisation au chargement
-    window.addEventListener('load', () => {
-      // Essayer de charger une sauvegarde existante
-      const hasLoadedSave = loadGame();
-      
-      // Initialiser le jeu (avec les données chargées ou par défaut)
-      symbols = Array(currentDifficulty).fill(0).map(() => getRandomSymbol());
-      updateDisplay();
-      updateStats();
-      updateGainsTable();
-      updateJackpotDisplay();
-      updateDropPoolDisplay(); // NOUVEAU : Mettre à jour l'affichage du pool
-      updateRemainingTurns();
-      removeWinClasses();
-      
-      if (!hasLoadedSave) {
-        message.textContent = `Bienvenue ! Alignez ${currentDifficulty} symboles identiques pour remporter le jackpot !`;
+    // Reset combo après inactivité
+    setInterval(() => {
+      const currentTime = Date.now();
+      if (currentTime - lastHitTime > 3000 && combo > 0) {
+        combo = 0;
+        comboIndicator.style.display = "none";
       }
-    });
+    }, 1000);
+
+    // Initialiser le jackpot
+    updateJackpot();
+    updateWinnersTable();
+    
+    // Rendre le tableau des gains déplaçable
+    makeElementDraggable(winnersTable);
+    
+    initGame();
   </script>
 </body>
 </html>
