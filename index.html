@@ -886,7 +886,7 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
 
-    /* NOUVEAU : Styles pour les panneaux déplaçables */
+    /* Styles pour les panneaux déplaçables */
     .draggable-panel {
       position: fixed;
       z-index: 1000; /* Au-dessus de tout */
@@ -951,7 +951,7 @@
       right: 20px;
     }
 
-    /* NOUVEAU : Panneau de débogage */
+    /* Panneau de débogage */
     #debugPanel {
       top: 180px;
       left: 20px;
@@ -965,6 +965,7 @@
     #debugPanel label {
       font-size: 0.9em;
       font-weight: bold;
+      width: 100%;
     }
 
     #debugPanel select, #debugPanel button {
@@ -989,6 +990,29 @@
     
     #debugPanel button:hover {
       background: linear-gradient(45deg, #2ecc71, #27ae60);
+    }
+
+    /* NOUVEAU : Styles pour le sélecteur de débogage avec image */
+    .debug-symbol-picker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+    
+    #debugPanel .debug-symbol-picker select {
+      flex-grow: 1; /* Le select prend la place restante */
+      width: auto; /* Annule le width: 100% précédent */
+    }
+    
+    .debug-preview-image {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid #feca57;
+      border-radius: 5px;
+      object-fit: contain;
+      padding: 2px;
     }
 
     /* Styles spécifiques pour les boutons des panneaux */
@@ -1171,6 +1195,15 @@
         flex-wrap: wrap;
         justify-content: center;
       }
+
+      /* Ajustement pour le sélecteur de débogage sur mobile */
+      #debugPanel .panel-body {
+        flex-direction: column;
+        align-items: center;
+      }
+      .debug-symbol-picker {
+        justify-content: center;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1230,8 +1263,12 @@
     <div class="panel-header">⚙️ Panneau Développeur</div>
     <div class="panel-body">
       <label for="debugSymbolSelect">Choisir un symbole :</label>
-      <select id="debugSymbolSelect">
-        </select>
+      
+      <div class="debug-symbol-picker">
+        <select id="debugSymbolSelect">
+          </select>
+        <img id="debugSymbolPreview" src="" alt="Aperçu" class="debug-preview-image">
+      </div>
       
       <label for="debugAlignCountSelect">Aligner :</label>
       <select id="debugAlignCountSelect">
@@ -1362,13 +1399,13 @@
   <div class="save-indicator" id="saveIndicator">💾 Sauvegarde automatique</div>
 
   <script>
-    // NOUVEAU : Fonction pour rendre les panneaux déplaçables
+    // Fonction pour rendre les panneaux déplaçables
     function makeDraggable(element) {
       let isDragging = false;
       let offsetX, offsetY;
 
       const header = element.querySelector('.panel-header');
-      if (!header) return; // Ne rend pas déplaçable s'il n'y a pas d'en-tête
+      if (!header) return; 
 
       const onDown = (e) => {
         isDragging = true;
@@ -1383,8 +1420,6 @@
           offsetX = touch.clientX - rect.left;
           offsetY = touch.clientY - rect.top;
         }
-
-        // Empêche la sélection de texte pendant le glissement
         e.preventDefault();
       };
 
@@ -1404,7 +1439,6 @@
         let newX = clientX - offsetX;
         let newY = clientY - offsetY;
 
-        // Contraindre le panneau à rester dans la fenêtre
         newX = Math.max(0, Math.min(newX, window.innerWidth - element.offsetWidth));
         newY = Math.max(0, Math.min(newY, window.innerHeight - element.offsetHeight));
 
@@ -1416,12 +1450,10 @@
         isDragging = false;
       };
 
-      // Événements souris
       header.addEventListener('mousedown', onDown);
       document.addEventListener('mousemove', onMove);
       document.addEventListener('mouseup', onUp);
 
-      // Événements tactiles
       header.addEventListener('touchstart', onDown, { passive: false });
       document.addEventListener('touchmove', onMove, { passive: false });
       document.addEventListener('touchend', onUp);
@@ -1429,28 +1461,24 @@
   
     // Variables du jeu
     let symbols = [];
-    let attempts = 0; // Compteur total de tours (ne se réinitialise jamais)
-    let currentGameAttempts = 0; // Compteur de tours pour la partie en cours
+    let attempts = 0; 
+    let currentGameAttempts = 0;
     let isSpinning = false;
     let winAnimationActive = false;
     let attackMode = 1;
-    let currentDifficulty = 6; // 6 symboles (niveau 2 uniquement)
+    let currentDifficulty = 6; 
     let isFastMode = false;
     let lastWinningSymbol = null;
-    let rosesCount = 0; // Roses totales gagnées (ne se réinitialise jamais)
-    let jackpotAmount = 250; // Commence toujours à 250
+    let rosesCount = 0;
+    let jackpotAmount = 250;
     let bonusCounter = 0;
-    let gainsHistory = []; // Historique des gains
-    let remainingTurns = 0; // Tours restants pour l'attaque en cours
-
-    // Variables pour le système de drop
-    let dropPool = 0; // Nombre de pièces dans le pool de drop
-    let dropCounter = 0; // Compteur pour ajouter des pièces au pool tous les 100 tours
-
-    // Variables pour les vitesses supplémentaires
+    let gainsHistory = [];
+    let remainingTurns = 0;
+    let dropPool = 0;
+    let dropCounter = 0;
     let isSuperSpeedMode = false;
     let isUltraSpeedMode = false;
-    let lightSpeed = 3; // Vitesse par défaut pour les lumières (3s)
+    let lightSpeed = 3;
 
     // Variables pour les sons
     let symbolSoundPlaying = false;
@@ -1462,7 +1490,7 @@
 
     // Système de sauvegarde
     const SAVE_KEY = 'jackpotGameSave';
-    let showSaveIndicator = true; // Pour éviter le spam de notifications
+    let showSaveIndicator = true; 
 
     // Fonction de sauvegarde
     function saveGame(showNotification = true) {
@@ -1644,10 +1672,12 @@
     const decreaseJackpotBtn = document.getElementById('decreaseJackpotBtn');
     const setJackpotBtn = document.getElementById('setJackpotBtn');
 
-    // NOUVEAU : Éléments DOM pour le panneau de débogage
+    // Éléments DOM pour le panneau de débogage
     const debugSymbolSelect = document.getElementById('debugSymbolSelect');
     const debugAlignCountSelect = document.getElementById('debugAlignCountSelect');
     const debugTriggerBtn = document.getElementById('debugTriggerBtn');
+    // NOUVEAU : Aperçu de l'image
+    const debugSymbolPreview = document.getElementById('debugSymbolPreview');
 
     // Fonction pour jouer le son des symboles
     function playSymbolSound() {
@@ -1807,7 +1837,7 @@
       return Math.floor(Math.random() * symbolTypes.length);
     }
     
-    // NOUVEAU : Obtenir un symbole aléatoire différent
+    // Obtenir un symbole aléatoire différent
     function getDifferentRandomSymbol(symbolIndexToAvoid) {
       let newSymbol;
       do {
@@ -2415,7 +2445,7 @@
       spinBtn.textContent = `Tourner (${mode.toLocaleString()} tour${mode > 1 ? 's' : ''})`;
     }
 
-    // NOUVEAU : Fonction pour forcer un alignement (debug)
+    // Fonction pour forcer un alignement (debug)
     async function forceAlignment() {
       if (isSpinning) {
         message.textContent = "Veuillez attendre la fin du tour en cours.";
@@ -2453,7 +2483,7 @@
         
         gainsHistory.push({
           type: 'partial',
-          tours: currentGameAttempts, // On peut mettre 0 ou le nb actuel
+          tours: currentGameAttempts, 
           symbolCount: count,
           roses: partialGainAmount,
           date: new Date().toLocaleString('fr-FR')
@@ -2466,7 +2496,6 @@
         updateGainsTable();
       }
       
-      // Réinitialiser les classes après un court délai
       setTimeout(removeWinClasses, 3000);
     }
 
@@ -2486,8 +2515,16 @@
     decreaseJackpotBtn.addEventListener('click', () => modifyJackpot(Math.max(0, jackpotAmount - 100)));
     setJackpotBtn.addEventListener('click', setJackpotManually);
     
-    // NOUVEAU : Événement pour le panneau de débogage
+    // Événement pour le panneau de débogage
     debugTriggerBtn.addEventListener('click', forceAlignment);
+
+    // NOUVEAU : Événement pour mettre à jour l'aperçu du symbole de débogage
+    debugSymbolSelect.addEventListener('change', () => {
+      const selectedIndex = parseInt(debugSymbolSelect.value);
+      if (symbolTypes[selectedIndex]) {
+        debugSymbolPreview.src = symbolTypes[selectedIndex].image;
+      }
+    });
 
     document.getElementById("mode1").addEventListener("click", () => setAttackMode(1));
     document.getElementById("mode10").addEventListener("click", () => setAttackMode(10));
@@ -2499,8 +2536,7 @@
 
     // Raccourcis clavier
     document.addEventListener('keydown', (e) => {
-      // Éviter les raccourcis si on est en train de taper dans un champ (comme le prompt)
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
       
       if (e.key === ' ' || e.key === 'Enter') {
         e.preventDefault();
@@ -2543,21 +2579,26 @@
         message.textContent = `Bienvenue ! Alignez ${currentDifficulty} symboles identiques pour remporter le jackpot !`;
       }
       
-      // NOUVEAU : Rendre les panneaux déplaçables
-      if (window.innerWidth > 768) { // Activer le glissement uniquement sur grand écran
+      // Rendre les panneaux déplaçables
+      if (window.innerWidth > 768) { 
         makeDraggable(document.getElementById('speedControlsPanel'));
         makeDraggable(document.getElementById('lightsControlsPanel'));
         makeDraggable(document.getElementById('jackpotControlsPanel'));
         makeDraggable(document.getElementById('debugPanel'));
       }
       
-      // NOUVEAU : Remplir le select du panneau de débogage
+      // Remplir le select du panneau de débogage
       symbolTypes.forEach((symbol, index) => {
         const option = document.createElement('option');
         option.value = index;
         option.textContent = symbol.name;
         debugSymbolSelect.appendChild(option);
       });
+      
+      // Définir l'image d'aperçu initiale
+      if (symbolTypes.length > 0) {
+        debugSymbolPreview.src = symbolTypes[0].image;
+      }
     });
   </script>
 </body>
