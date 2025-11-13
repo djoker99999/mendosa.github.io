@@ -22,6 +22,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow-x: hidden; /* Empêche le débordement horizontal */
     }
 
     .game-container {
@@ -35,6 +36,7 @@
       border: 3px solid rgba(255, 215, 0, 0.5);
       position: relative;
       overflow: hidden;
+      z-index: 10; /* S'assurer que le jeu est au-dessus du fond mais sous les panneaux */
     }
 
     .game-container::before {
@@ -595,7 +597,7 @@
       filter: none;
     }
 
-    /* Nouveau : Compteur de tours restants */
+    /* Compteur de tours restants */
     .remaining-turns {
       background: linear-gradient(45deg, #3498db, #2980b9);
       padding: 10px;
@@ -765,7 +767,7 @@
       box-shadow: 0 8px 25px rgba(0,0,0,0.4);
     }
 
-    /* NOUVEAU : Système de Drop */
+    /* Système de Drop */
     .drop-pool-display {
       background: linear-gradient(45deg, #f39c12, #e67e22);
       padding: 10px;
@@ -884,18 +886,39 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
 
-    /* NOUVEAU : Boutons de contrôle supplémentaires */
-    .extra-controls {
+    /* NOUVEAU : Styles pour les panneaux déplaçables */
+    .draggable-panel {
       position: fixed;
-      top: 20px;
-      left: 20px;
+      z-index: 1000; /* Au-dessus de tout */
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid #feca57;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+      color: white;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .panel-header {
+      padding: 10px 15px;
+      cursor: move;
+      background: linear-gradient(45deg, #feca57, #ff6b9d);
+      border-top-left-radius: 13px;
+      border-top-right-radius: 13px;
+      font-weight: bold;
+      font-size: 1.1em;
+      text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+
+    .panel-body {
+      padding: 15px;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      z-index: 100;
     }
 
-    .extra-controls button {
+    /* Styles pour les boutons DANS les panneaux */
+    .draggable-panel button {
       padding: 10px 15px;
       font-size: 14px;
       background: linear-gradient(45deg, #9b59b6, #8e44ad);
@@ -905,77 +928,89 @@
       align-items: center;
       justify-content: center;
       gap: 5px;
+      margin: 0; /* Annuler la marge par défaut des boutons */
     }
-
-    .extra-controls button:hover {
+    
+    .draggable-panel button:hover {
       background: linear-gradient(45deg, #8e44ad, #9b59b6);
     }
 
-    .extra-controls button.active {
+    /* Positionnement initial des panneaux */
+    #speedControlsPanel {
+      top: 20px;
+      left: 20px;
+    }
+
+    #lightsControlsPanel {
+      bottom: 20px;
+      right: 20px;
+    }
+
+    #jackpotControlsPanel {
+      top: 20px;
+      right: 20px;
+    }
+
+    /* NOUVEAU : Panneau de débogage */
+    #debugPanel {
+      top: 180px;
+      left: 20px;
+    }
+
+    #debugPanel .panel-body {
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    #debugPanel label {
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+
+    #debugPanel select, #debugPanel button {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #feca57;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1em;
+    }
+    
+    #debugPanel select option {
+      background: #333;
+      color: white;
+    }
+
+    #debugPanel button {
+      background: linear-gradient(45deg, #27ae60, #2ecc71);
+      cursor: pointer;
+    }
+    
+    #debugPanel button:hover {
+      background: linear-gradient(45deg, #2ecc71, #27ae60);
+    }
+
+    /* Styles spécifiques pour les boutons des panneaux */
+    #speedControlsPanel button.active,
+    #lightsControlsPanel button.active,
+    #jackpotControlsPanel button.active {
       background: linear-gradient(45deg, #e74c3c, #c0392b);
       animation: pulseSpeed 1s infinite;
     }
 
-    .light-speed-controls {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 100;
-    }
-
-    .light-speed-controls button {
-      padding: 10px 15px;
-      font-size: 14px;
+    #lightsControlsPanel button {
       background: linear-gradient(45deg, #3498db, #2980b9);
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
     }
-
-    .light-speed-controls button:hover {
+    #lightsControlsPanel button:hover {
       background: linear-gradient(45deg, #2980b9, #3498db);
     }
 
-    .light-speed-controls button.active {
-      background: linear-gradient(45deg, #f39c12, #e67e22);
-      animation: pulseSpeed 1s infinite;
-    }
-
-    .jackpot-controls {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 100;
-    }
-
-    .jackpot-controls button {
-      padding: 10px 15px;
-      font-size: 14px;
+    #jackpotControlsPanel button {
       background: linear-gradient(45deg, #e74c3c, #c0392b);
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
     }
-
-    .jackpot-controls button:hover {
+    #jackpotControlsPanel button:hover {
       background: linear-gradient(45deg, #c0392b, #e74c3c);
-    }
-
-    .jackpot-controls button.active {
-      background: linear-gradient(45deg, #f39c12, #e67e22);
-      animation: pulseSpeed 1s infinite;
     }
 
     /* Popup pour 4 ou 5 symboles */
@@ -1115,11 +1150,26 @@
         align-items: center;
       }
 
-      .extra-controls, .light-speed-controls, .jackpot-controls {
-        position: static;
+      /* Sur mobile, les panneaux ne sont pas déplaçables et prennent la largeur */
+      .draggable-panel {
+        position: relative;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 90%;
+        margin: 10px auto;
+        transform: none !important; /* Annuler la transformation du drag */
+      }
+      
+      .panel-header {
+        cursor: default; /* Pas de curseur de déplacement */
+      }
+      
+      .panel-body {
         flex-direction: row;
+        flex-wrap: wrap;
         justify-content: center;
-        margin: 10px 0;
       }
     }
 
@@ -1151,41 +1201,65 @@
   </style>
 </head>
 <body>
-  <!-- NOUVEAU : Contrôles supplémentaires hors de la zone de jeu -->
-  <div class="extra-controls">
-    <button id="superSpeedBtn">⚡ Super Vitesse</button>
-    <button id="ultraSpeedBtn">🚀 Ultra Vitesse</button>
+  <div class="draggable-panel" id="speedControlsPanel">
+    <div class="panel-header">⚡ Contrôle Vitesse</div>
+    <div class="panel-body">
+      <button id="superSpeedBtn">⚡ Super Vitesse</button>
+      <button id="ultraSpeedBtn">🚀 Ultra Vitesse</button>
+    </div>
   </div>
 
-  <div class="light-speed-controls">
-    <button id="slowLightsBtn">🐢 Lumières Lentes</button>
-    <button id="fastLightsBtn">⚡ Lumières Rapides</button>
+  <div class="draggable-panel" id="lightsControlsPanel">
+    <div class="panel-header">💡 Contrôle Lumières</div>
+    <div class="panel-body">
+      <button id="slowLightsBtn">🐢 Lumières Lentes</button>
+      <button id="fastLightsBtn">⚡ Lumières Rapides</button>
+    </div>
   </div>
 
-  <div class="jackpot-controls">
-    <button id="increaseJackpotBtn">➕ Augmenter Jackpot</button>
-    <button id="decreaseJackpotBtn">➖ Diminuer Jackpot</button>
-    <button id="setJackpotBtn">🎯 Définir Jackpot</button>
+  <div class="draggable-panel" id="jackpotControlsPanel">
+    <div class="panel-header">💰 Contrôle Jackpot</div>
+    <div class="panel-body">
+      <button id="increaseJackpotBtn">➕ Augmenter Jackpot</button>
+      <button id="decreaseJackpotBtn">➖ Diminuer Jackpot</button>
+      <button id="setJackpotBtn">🎯 Définir Jackpot</button>
+    </div>
   </div>
+
+  <div class="draggable-panel" id="debugPanel">
+    <div class="panel-header">⚙️ Panneau Développeur</div>
+    <div class="panel-body">
+      <label for="debugSymbolSelect">Choisir un symbole :</label>
+      <select id="debugSymbolSelect">
+        </select>
+      
+      <label for="debugAlignCountSelect">Aligner :</label>
+      <select id="debugAlignCountSelect">
+        <option value="4">4 symboles</option>
+        <option value="5">5 symboles</option>
+        <option value="6">6 symboles (Jackpot)</option>
+      </select>
+      
+      <button id="debugTriggerBtn">Déclencher l'alignement</button>
+    </div>
+  </div>
+
 
   <div class="game-container">
     <h1>🎰 Jackpot des Symboles Mystères</h1>
     
-    <!-- Compteur de roses jackpot -->
     <div class="jackpot-display" id="jackpotDisplay">
       <div class="jackpot-label">JACKPOT ACTUEL</div>
       <div class="jackpot-amount" id="jackpotAmount">250 🌹</div>
       <div class="jackpot-info" id="jackpotInfo">Jackpot visible à partir de 1000 roses</div>
     </div>
 
-    <!-- NOUVEAU : Affichage du pool de drop -->
     <div class="drop-pool-display" id="dropPoolDisplay">
       <div class="drop-pool-label">POOL DE DROP</div>
       <div class="drop-pool-value" id="dropPoolValue">0 pièces</div>
       <div class="drop-pool-info" id="dropPoolInfo">Chance de 1/500 de gagner des pièces</div>
     </div>
 
-    <!-- Compteur de tours restants -->
     <div class="remaining-turns" id="remainingTurns">
       <div class="remaining-turns-label">Tours restants</div>
       <div class="remaining-turns-value" id="remainingTurnsValue">0</div>
@@ -1197,8 +1271,7 @@
     <div class="lock-body">
       <div class="lock-shackle"></div>
       <div class="lock-container" id="lockContainer">
-        <!-- Les roues de symboles seront générées ici -->
-      </div>
+        </div>
     </div>
 
     <div class="attack-modes">
@@ -1236,13 +1309,11 @@
       </div>
     </div>
 
-    <!-- Contrôles principaux -->
     <div class="main-controls">
       <button id="spinBtn">Tourner les rouleaux</button>
       <button id="speedBtn">⏩ Accélérer</button>
     </div>
 
-    <!-- Statistiques -->
     <div class="stats">
       <div class="stat-item">
         <div>Tours totaux</div>
@@ -1262,7 +1333,6 @@
       </div>
     </div>
 
-    <!-- Tableau des récompenses -->
     <div class="gains-history">
       <h3>🏆 Récompenses 🏆</h3>
       <div id="gainsTableContainer">
@@ -1273,7 +1343,6 @@
     <div class="controls">
       <button id="resetBtn">Réinitialiser Jackpot</button>
       <button id="clearBtn" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">🗑️ Effacer données</button>
-      <!-- NOUVEAU : Bouton pour réinitialiser les récompenses -->
       <button id="resetRewardsBtn" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">🔄 Réinitialiser Récompenses</button>
     </div>
 
@@ -1290,10 +1359,74 @@
     <div class="speed-indicator" id="speedIndicator">VITESSE RAPIDE</div>
   </div>
 
-  <!-- Indicateur de sauvegarde -->
   <div class="save-indicator" id="saveIndicator">💾 Sauvegarde automatique</div>
 
   <script>
+    // NOUVEAU : Fonction pour rendre les panneaux déplaçables
+    function makeDraggable(element) {
+      let isDragging = false;
+      let offsetX, offsetY;
+
+      const header = element.querySelector('.panel-header');
+      if (!header) return; // Ne rend pas déplaçable s'il n'y a pas d'en-tête
+
+      const onDown = (e) => {
+        isDragging = true;
+        
+        const rect = element.getBoundingClientRect();
+        
+        if (e.type === 'mousedown') {
+          offsetX = e.clientX - rect.left;
+          offsetY = e.clientY - rect.top;
+        } else if (e.type === 'touchstart') {
+          const touch = e.touches[0];
+          offsetX = touch.clientX - rect.left;
+          offsetY = touch.clientY - rect.top;
+        }
+
+        // Empêche la sélection de texte pendant le glissement
+        e.preventDefault();
+      };
+
+      const onMove = (e) => {
+        if (!isDragging) return;
+
+        let clientX, clientY;
+        if (e.type === 'mousemove') {
+          clientX = e.clientX;
+          clientY = e.clientY;
+        } else if (e.type === 'touchmove') {
+          const touch = e.touches[0];
+          clientX = touch.clientX;
+          clientY = touch.clientY;
+        }
+
+        let newX = clientX - offsetX;
+        let newY = clientY - offsetY;
+
+        // Contraindre le panneau à rester dans la fenêtre
+        newX = Math.max(0, Math.min(newX, window.innerWidth - element.offsetWidth));
+        newY = Math.max(0, Math.min(newY, window.innerHeight - element.offsetHeight));
+
+        element.style.left = `${newX}px`;
+        element.style.top = `${newY}px`;
+      };
+
+      const onUp = () => {
+        isDragging = false;
+      };
+
+      // Événements souris
+      header.addEventListener('mousedown', onDown);
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+
+      // Événements tactiles
+      header.addEventListener('touchstart', onDown, { passive: false });
+      document.addEventListener('touchmove', onMove, { passive: false });
+      document.addEventListener('touchend', onUp);
+    }
+  
     // Variables du jeu
     let symbols = [];
     let attempts = 0; // Compteur total de tours (ne se réinitialise jamais)
@@ -1310,11 +1443,11 @@
     let gainsHistory = []; // Historique des gains
     let remainingTurns = 0; // Tours restants pour l'attaque en cours
 
-    // NOUVEAU : Variables pour le système de drop
+    // Variables pour le système de drop
     let dropPool = 0; // Nombre de pièces dans le pool de drop
     let dropCounter = 0; // Compteur pour ajouter des pièces au pool tous les 100 tours
 
-    // NOUVEAU : Variables pour les vitesses supplémentaires
+    // Variables pour les vitesses supplémentaires
     let isSuperSpeedMode = false;
     let isUltraSpeedMode = false;
     let lightSpeed = 3; // Vitesse par défaut pour les lumières (3s)
@@ -1340,15 +1473,14 @@
         jackpotAmount: jackpotAmount,
         bonusCounter: bonusCounter,
         gainsHistory: gainsHistory,
-        dropPool: dropPool, // NOUVEAU : Sauvegarder le pool de drop
-        dropCounter: dropCounter, // NOUVEAU : Sauvegarder le compteur de drop
+        dropPool: dropPool,
+        dropCounter: dropCounter,
         lastSaved: new Date().toISOString()
       };
       
       try {
         localStorage.setItem(SAVE_KEY, JSON.stringify(saveData));
         
-        // Afficher brièvement l'indicateur de sauvegarde (seulement si demandé)
         const saveIndicator = document.getElementById('saveIndicator');
         if (saveIndicator && showNotification && showSaveIndicator) {
           saveIndicator.classList.add('show');
@@ -1377,12 +1509,11 @@
           jackpotAmount = data.jackpotAmount || 250;
           bonusCounter = data.bonusCounter || 0;
           gainsHistory = data.gainsHistory || [];
-          dropPool = data.dropPool || 0; // NOUVEAU : Charger le pool de drop
-          dropCounter = data.dropCounter || 0; // NOUVEAU : Charger le compteur de drop
+          dropPool = data.dropPool || 0;
+          dropCounter = data.dropCounter || 0;
           
           console.log('Partie chargée depuis la sauvegarde');
           
-          // Afficher un message de bienvenue avec les stats
           setTimeout(() => {
             message.textContent = `Bon retour ! Vous avez ${rosesCount} roses totales et ${gainsHistory.length} jackpot(s) gagné(s) !`;
           }, 500);
@@ -1401,7 +1532,6 @@
       if (confirm('⚠️ ATTENTION ⚠️\n\nVoulez-vous vraiment effacer TOUTES vos données de jeu ?\n\nCela supprimera :\n• ' + attempts + ' tours joués\n• ' + rosesCount + ' roses gagnées\n• ' + gainsHistory.length + ' jackpots dans l\'historique\n\nCette action est IRRÉVERSIBLE !')) {
         localStorage.removeItem(SAVE_KEY);
         
-        // Réinitialiser toutes les variables
         attempts = 0;
         currentGameAttempts = 0;
         rosesCount = 0;
@@ -1409,22 +1539,20 @@
         bonusCounter = 0;
         gainsHistory = [];
         remainingTurns = 0;
-        dropPool = 0; // NOUVEAU : Réinitialiser le pool de drop
-        dropCounter = 0; // NOUVEAU : Réinitialiser le compteur de drop
+        dropPool = 0;
+        dropCounter = 0;
         
-        // Réinitialiser l'affichage
         symbols = Array(currentDifficulty).fill(0).map(() => getRandomSymbol());
         updateDisplay();
         updateStats();
         updateGainsTable();
         updateJackpotDisplay();
-        updateDropPoolDisplay(); // NOUVEAU : Mettre à jour l'affichage du pool
+        updateDropPoolDisplay();
         updateRemainingTurns();
         removeWinClasses();
         
         message.textContent = '🗑️ Toutes les données ont été effacées ! Vous repartez de zéro.';
         
-        // Animation de confirmation
         const gameContainer = document.querySelector('.game-container');
         gameContainer.style.animation = 'none';
         setTimeout(() => {
@@ -1433,108 +1561,49 @@
       }
     }
 
-    // NOUVEAU : Fonction pour réinitialiser les récompenses
+    // Fonction pour réinitialiser les récompenses
     function resetRewards() {
       if (confirm('⚠️ ATTENTION ⚠️\n\nVoulez-vous vraiment réinitialiser TOUTES vos récompenses ?\n\nCela supprimera :\n• ' + gainsHistory.length + ' jackpots dans l\'historique\n• L\'historique complet des gains\n\nCette action est IRRÉVERSIBLE !')) {
         gainsHistory = [];
         
-        // Mettre à jour le tableau des gains
         updateGainsTable();
         
         message.textContent = '🔄 Toutes les récompenses ont été réinitialisées !';
         
-        // Animation de confirmation
         const gameContainer = document.querySelector('.game-container');
         gameContainer.style.animation = 'none';
         setTimeout(() => {
           gameContainer.style.animation = '';
         }, 100);
         
-        // Sauvegarder les changements
         saveGame(true);
       }
     }
 
-    // Sauvegarde automatique toutes les 10 secondes pendant le jeu
+    // Sauvegarde automatique
     setInterval(() => {
       if (!isSpinning && attempts > 0) {
-        saveGame(true); // Avec notification
+        saveGame(true);
       }
     }, 10000);
 
-    // Sauvegarder avant de quitter la page
     window.addEventListener('beforeunload', () => {
-      saveGame(false); // Sans notification car la page se ferme
+      saveGame(false);
     });
 
-    // Symboles disponibles avec le nouveau symbole ajouté
+    // Symboles disponibles
     const symbolTypes = [
-      { 
-        type: 'symbol1', 
-        image: 'https://i.ibb.co/whJNdnxZ/symbol1.png', 
-        name: 'Symbole 1',
-        colorClass: 'symbol-1'
-      },
-      { 
-        type: 'symbol2', 
-        image: 'https://i.ibb.co/ymsZKVwn/symbol2.png', 
-        name: 'Symbole 2',
-        colorClass: 'symbol-2'
-      },
-      { 
-        type: 'symbol3', 
-        image: 'https://i.ibb.co/gbf2RYFk/symbol3.png', 
-        name: 'Symbole 3',
-        colorClass: 'symbol-3'
-      },
-      { 
-        type: 'symbol4', 
-        image: 'https://i.ibb.co/sv8c6sRK/symbol4.png', 
-        name: 'Symbole 4',
-        colorClass: 'symbol-4'
-      },
-      { 
-        type: 'symbol5', 
-        image: 'https://i.ibb.co/Xr6J8bfK/symbol5.png',
-        name: 'Symbole 5',
-        colorClass: 'symbol-5'
-      },
-      { 
-        type: 'symbol6', 
-        image: 'https://i.ibb.co/prk8cpBr/symbol6.png',
-        name: 'Symbole 6',
-        colorClass: 'symbol-6'
-      },
-      { 
-        type: 'symbol7', 
-        image: 'https://i.ibb.co/2fBDM0x/symbol7.png', 
-        name: 'Symbole 7',
-        colorClass: 'symbol-7'
-      },
-      { 
-        type: 'symbol8', 
-        image: 'https://i.ibb.co/gbnj5Qzw/symbol8.png', 
-        name: 'Symbole 8',
-        colorClass: 'symbol-8'
-      },
-      { 
-        type: 'symbol9', 
-        image: 'https://i.ibb.co/DfDvmC8T/IMG-6585.png', 
-        name: 'Symbole 9',
-        colorClass: 'symbol-9'
-      },
-      { 
-        type: 'symbol10', 
-        image: 'https://i.ibb.co/2YpQxB1Y/IMG-6620.png', 
-        name: 'Symbole 10',
-        colorClass: 'symbol-10'
-      },
-      { 
-        type: 'symbol11', 
-        image: 'https://i.ibb.co/0pM1D3wm/IMG-7123.png', 
-        name: 'Symbole 11',
-        colorClass: 'symbol-11'
-      }
+      { type: 'symbol1', image: 'https://i.ibb.co/whJNdnxZ/symbol1.png', name: 'Symbole 1', colorClass: 'symbol-1' },
+      { type: 'symbol2', image: 'https://i.ibb.co/ymsZKVwn/symbol2.png', name: 'Symbole 2', colorClass: 'symbol-2' },
+      { type: 'symbol3', image: 'https://i.ibb.co/gbf2RYFk/symbol3.png', name: 'Symbole 3', colorClass: 'symbol-3' },
+      { type: 'symbol4', image: 'https://i.ibb.co/sv8c6sRK/symbol4.png', name: 'Symbole 4', colorClass: 'symbol-4' },
+      { type: 'symbol5', image: 'https://i.ibb.co/Xr6J8bfK/symbol5.png', name: 'Symbole 5', colorClass: 'symbol-5' },
+      { type: 'symbol6', image: 'https://i.ibb.co/prk8cpBr/symbol6.png', name: 'Symbole 6', colorClass: 'symbol-6' },
+      { type: 'symbol7', image: 'https://i.ibb.co/2fBDM0x/symbol7.png', name: 'Symbole 7', colorClass: 'symbol-7' },
+      { type: 'symbol8', image: 'https://i.ibb.co/gbnj5Qzw/symbol8.png', name: 'Symbole 8', colorClass: 'symbol-8' },
+      { type: 'symbol9', image: 'https://i.ibb.co/DfDvmC8T/IMG-6585.png', name: 'Symbole 9', colorClass: 'symbol-9' },
+      { type: 'symbol10', image: 'https://i.ibb.co/2YpQxB1Y/IMG-6620.png', name: 'Symbole 10', colorClass: 'symbol-10' },
+      { type: 'symbol11', image: 'https://i.ibb.co/0pM1D3wm/IMG-7123.png', name: 'Symbole 11', colorClass: 'symbol-11' }
     ];
 
     // Éléments DOM
@@ -1543,7 +1612,7 @@
     const speedBtn = document.getElementById('speedBtn');
     const resetBtn = document.getElementById('resetBtn');
     const clearBtn = document.getElementById('clearBtn');
-    const resetRewardsBtn = document.getElementById('resetRewardsBtn'); // NOUVEAU : Bouton de réinitialisation des récompenses
+    const resetRewardsBtn = document.getElementById('resetRewardsBtn');
     const message = document.getElementById('message');
     const resultContainer = document.getElementById('resultContainer');
     const attemptsCount = document.getElementById('attemptsCount');
@@ -1562,11 +1631,11 @@
     const remainingTurnsValue = document.getElementById('remainingTurnsValue');
     const remainingTurnsProgress = document.getElementById('remainingTurnsProgress');
     
-    // NOUVEAU : Éléments DOM pour le système de drop
+    // Éléments DOM pour le système de drop
     const dropPoolValue = document.getElementById('dropPoolValue');
     const dropPoolInfo = document.getElementById('dropPoolInfo');
     
-    // NOUVEAU : Éléments DOM pour les boutons supplémentaires
+    // Éléments DOM pour les boutons supplémentaires
     const superSpeedBtn = document.getElementById('superSpeedBtn');
     const ultraSpeedBtn = document.getElementById('ultraSpeedBtn');
     const slowLightsBtn = document.getElementById('slowLightsBtn');
@@ -1574,6 +1643,11 @@
     const increaseJackpotBtn = document.getElementById('increaseJackpotBtn');
     const decreaseJackpotBtn = document.getElementById('decreaseJackpotBtn');
     const setJackpotBtn = document.getElementById('setJackpotBtn');
+
+    // NOUVEAU : Éléments DOM pour le panneau de débogage
+    const debugSymbolSelect = document.getElementById('debugSymbolSelect');
+    const debugAlignCountSelect = document.getElementById('debugAlignCountSelect');
+    const debugTriggerBtn = document.getElementById('debugTriggerBtn');
 
     // Fonction pour jouer le son des symboles
     function playSymbolSound() {
@@ -1603,13 +1677,8 @@
 
     // Initialisation du jeu
     function initGame() {
-      // Ne PAS réinitialiser attempts (compteur total)
-      // Ne PAS réinitialiser rosesCount (roses totales)
-      // Ne PAS réinitialiser gainsHistory (historique)
-      // Ne PAS réinitialiser dropPool (pool de drop)
-      
-      currentGameAttempts = 0; // Réinitialiser seulement le compteur de la partie en cours
-      jackpotAmount = 250; // Toujours commencer à 250
+      currentGameAttempts = 0;
+      jackpotAmount = 250;
       bonusCounter = 0;
       remainingTurns = 0;
       symbols = Array(currentDifficulty).fill(0).map(() => getRandomSymbol());
@@ -1625,16 +1694,15 @@
 
     // Mettre à jour les statistiques
     function updateStats() {
-      attemptsCount.textContent = attempts; // Compteur total
-      currentGameAttemptsElement.textContent = currentGameAttempts; // Compteur de la partie
-      rosesCountElement.textContent = rosesCount; // Roses totales
-      nextBonusElement.textContent = 30 - (bonusCounter % 30); // CORRECTION : 30 tours au lieu de 20
+      attemptsCount.textContent = attempts;
+      currentGameAttemptsElement.textContent = currentGameAttempts;
+      rosesCountElement.textContent = rosesCount;
+      nextBonusElement.textContent = 30 - (bonusCounter % 30);
       
-      // Sauvegarder après chaque mise à jour (sans notification)
       saveGame(false);
     }
 
-    // NOUVEAU : Mettre à jour l'affichage du pool de drop
+    // Mettre à jour l'affichage du pool de drop
     function updateDropPoolDisplay() {
       dropPoolValue.textContent = `${dropPool} pièces`;
       
@@ -1650,7 +1718,6 @@
       if (remainingTurns > 0) {
         remainingTurnsValue.textContent = `${remainingTurns} tour${remainingTurns > 1 ? 's' : ''}`;
         
-        // Mettre à jour la barre de progression
         const progressPercentage = (remainingTurns / attackMode) * 100;
         remainingTurnsProgress.style.width = `${progressPercentage}%`;
       } else {
@@ -1695,13 +1762,11 @@
           <tbody>
       `;
 
-      // Afficher les 10 derniers gains (ou moins s'il y en a moins de 10)
       const recentGains = gainsHistory.slice(-10).reverse();
       recentGains.forEach((gain, index) => {
         const gainNumber = gainsHistory.length - index;
         const dateDisplay = gain.date ? gain.date.split(' ')[0] : '-';
         
-        // CORRECTION : Afficher le bon nombre de symboles dans l'historique
         let gainType;
         if (gain.type === 'drop') {
           gainType = 'DROP';
@@ -1740,6 +1805,15 @@
     // Obtenir un symbole aléatoire
     function getRandomSymbol() {
       return Math.floor(Math.random() * symbolTypes.length);
+    }
+    
+    // NOUVEAU : Obtenir un symbole aléatoire différent
+    function getDifferentRandomSymbol(symbolIndexToAvoid) {
+      let newSymbol;
+      do {
+        newSymbol = getRandomSymbol();
+      } while (newSymbol === symbolIndexToAvoid);
+      return newSymbol;
     }
 
     // Mise à jour de l'affichage des symboles
@@ -1781,7 +1855,7 @@
       });
     }
 
-    // Vérifier la victoire et compter les symboles identiques
+    // Vérifier la victoire
     function checkWin() {
       const firstSymbol = symbols[0];
       for (let i = 1; i < symbols.length; i++) {
@@ -1794,12 +1868,11 @@
       return true;
     }
 
-    // Compter le nombre de symboles identiques et identifier les positions
+    // Compter le nombre de symboles identiques
     function countMatchingSymbols() {
       const symbolCounts = {};
       const symbolPositions = {};
       
-      // Compter les occurrences de chaque symbole
       symbols.forEach((symbolIndex, position) => {
         const symbolName = symbolTypes[symbolIndex].name;
         symbolCounts[symbolName] = (symbolCounts[symbolName] || 0) + 1;
@@ -1810,7 +1883,6 @@
         symbolPositions[symbolName].push(position);
       });
       
-      // Trouver le symbole avec le plus d'occurrences
       let maxCount = 0;
       let maxSymbol = null;
       let maxPositions = [];
@@ -1830,11 +1902,10 @@
       };
     }
 
-    // CORRECTION : Mettre en évidence les symboles identiques avec les bonnes valeurs
+    // Mettre en évidence les symboles identiques
     function highlightMatchingSymbols() {
       const symbolGroups = {};
       
-      // Grouper les symboles par type
       symbols.forEach((symbolIndex, position) => {
         const symbolType = symbolIndex;
         if (!symbolGroups[symbolType]) {
@@ -1843,12 +1914,10 @@
         symbolGroups[symbolType].push(position);
       });
       
-      // Supprimer d'abord toutes les classes de victoire partielles
       document.querySelectorAll('.symbol-wheel').forEach(symbol => {
         symbol.classList.remove('partial-win');
       });
       
-      // Appliquer la classe partial-win à TOUS les groupes de 4 symboles ou plus
       Object.values(symbolGroups).forEach(positions => {
         if (positions.length >= 4) {
           positions.forEach(position => {
@@ -1861,11 +1930,10 @@
       });
     }
 
-    // CORRECTION : Gérer le bonus de roses - UNIQUEMENT tous les 30 tours
+    // Gérer le bonus de roses
     function handleRoseBonus() {
       bonusCounter++;
       
-      // CORRECTION : Ajouter une rose seulement tous les 30 tours (au lieu de 20)
       if (bonusCounter % 30 === 0) {
         rosesCount += 1;
         jackpotAmount += 1;
@@ -1876,25 +1944,21 @@
       }
     }
 
-    // NOUVEAU : Gérer le système de drop
+    // Gérer le système de drop
     function handleDropSystem() {
-      // Incrémenter le compteur de drop
       dropCounter++;
       
-      // Ajouter 10 pièces au pool tous les 100 tours
       if (dropCounter % 100 === 0) {
         dropPool += 10;
         message.textContent = `💰 +10 pièces ajoutées au pool de drop ! Pool actuel: ${dropPool} pièces`;
         updateDropPoolDisplay();
       }
       
-      // Chance de 1 sur 500 de gagner les pièces du pool
       if (dropPool > 0 && Math.random() < 1/500) {
         const coinsWon = dropPool;
         rosesCount += coinsWon;
         jackpotAmount += coinsWon;
         
-        // Ajouter le drop à l'historique des gains
         gainsHistory.push({
           type: 'drop',
           tours: currentGameAttempts,
@@ -1902,13 +1966,9 @@
           date: new Date().toLocaleString('fr-FR')
         });
         
-        // Mettre à jour le tableau des gains
         updateGainsTable();
-        
-        // Afficher l'animation de drop
         showDropAnimation(coinsWon);
         
-        // Réinitialiser le pool
         dropPool = 0;
         updateDropPoolDisplay();
         updateStats();
@@ -1920,7 +1980,7 @@
       return false;
     }
 
-    // NOUVEAU : Afficher l'animation de drop
+    // Afficher l'animation de drop
     function showDropAnimation(coinsWon) {
       const dropAnimation = document.createElement('div');
       dropAnimation.className = 'drop-animation';
@@ -1950,7 +2010,7 @@
       }, 5000);
     }
 
-    // NOUVEAU : Afficher le popup pour 4 ou 5 symboles
+    // Afficher le popup pour 4 ou 5 symboles
     function showPartialWinPopup(symbolCount, rosesWon) {
       const partialWinPopup = document.createElement('div');
       partialWinPopup.className = 'partial-win-popup';
@@ -1990,10 +2050,9 @@
       }, 5000);
     }
 
-    // Animation de rotation de tous les symboles simultanément
+    // Animation de rotation
     function spinAllSymbolsSimultaneously() {
       return new Promise(resolve => {
-        // Activer l'animation de rotation sur tous les symboles
         document.querySelectorAll('.symbol-wheel').forEach(symbolElement => {
           if (isUltraSpeedMode) {
             symbolElement.classList.add('spinning', 'fast-spin');
@@ -2007,7 +2066,6 @@
         let spins = 0;
         let maxSpins, spinInterval;
         
-        // Déterminer la vitesse en fonction du mode
         if (isUltraSpeedMode) {
           maxSpins = 3 + Math.floor(Math.random() * 3);
           spinInterval = 10;
@@ -2023,7 +2081,6 @@
         }
         
         const spinIntervalId = setInterval(() => {
-          // Changer tous les symboles en même temps
           for (let i = 0; i < symbols.length; i++) {
             symbols[i] = getRandomSymbol();
             updateSingleSymbol(i);
@@ -2033,7 +2090,6 @@
           
           if (spins >= maxSpins) {
             clearInterval(spinIntervalId);
-            // Arrêter l'animation de rotation sur tous les symboles
             document.querySelectorAll('.symbol-wheel').forEach(symbolElement => {
               symbolElement.classList.remove('spinning', 'fast-spin');
             });
@@ -2087,13 +2143,15 @@
       }
     }
 
-    // NOUVEAU : Activer/désactiver le mode super vitesse
+    // Activer/désactiver le mode super vitesse
     function toggleSuperSpeedMode() {
       isSuperSpeedMode = !isSuperSpeedMode;
       
       if (isSuperSpeedMode) {
         superSpeedBtn.classList.add('active');
         isFastMode = false;
+        isUltraSpeedMode = false; // Désactiver l'ultra si super est activé
+        ultraSpeedBtn.classList.remove('active');
         speedBtn.classList.remove('active');
         speedBtn.innerHTML = '⏩ Accélérer';
         speedIndicator.style.display = 'none';
@@ -2104,14 +2162,14 @@
       }
     }
 
-    // NOUVEAU : Activer/désactiver le mode ultra vitesse
+    // Activer/désactiver le mode ultra vitesse
     function toggleUltraSpeedMode() {
       isUltraSpeedMode = !isUltraSpeedMode;
       
       if (isUltraSpeedMode) {
         ultraSpeedBtn.classList.add('active');
         isFastMode = false;
-        isSuperSpeedMode = false;
+        isSuperSpeedMode = false; // Désactiver super si ultra est activé
         superSpeedBtn.classList.remove('active');
         speedBtn.classList.remove('active');
         speedBtn.innerHTML = '⏩ Accélérer';
@@ -2123,15 +2181,13 @@
       }
     }
 
-    // NOUVEAU : Modifier la vitesse des lumières
+    // Modifier la vitesse des lumières
     function setLightSpeed(speed) {
       lightSpeed = speed;
       
-      // Mettre à jour l'animation de la bordure
       const gameContainer = document.querySelector('.game-container');
       gameContainer.style.animationDuration = `${lightSpeed}s`;
       
-      // Mettre à jour l'état des boutons
       if (speed === 5) {
         slowLightsBtn.classList.add('active');
         fastLightsBtn.classList.remove('active');
@@ -2143,7 +2199,7 @@
       }
     }
 
-    // NOUVEAU : Modifier le jackpot
+    // Modifier le jackpot
     function modifyJackpot(amount) {
       jackpotAmount = amount;
       updateJackpotDisplay();
@@ -2151,7 +2207,7 @@
       message.textContent = `Jackpot modifié à ${jackpotAmount} roses !`;
     }
 
-    // NOUVEAU : Définir le jackpot manuellement
+    // Définir le jackpot manuellement
     function setJackpotManually() {
       const newAmount = prompt('Entrez le nouveau montant du jackpot :', jackpotAmount);
       if (newAmount !== null) {
@@ -2202,60 +2258,45 @@
       spinBtn.disabled = true;
       message.textContent = "Les rouleaux tournent...";
       
-      // Supprimer les classes de victoire partielles avant de commencer
       removeWinClasses();
-      
-      // Jouer le son de rotation
       playSpinSound();
       
-      // Initialiser le compteur de tours restants
       remainingTurns = attackMode;
       updateRemainingTurns();
       
       for (let coup = 0; coup < attackMode; coup++) {
-        // Faire tourner tous les symboles en même temps
         await spinAllSymbolsSimultaneously();
         
         attempts++;
         currentGameAttempts++;
         
-        // Mettre à jour le compteur de tours restants
         remainingTurns = attackMode - coup - 1;
         updateRemainingTurns();
         
-        // CORRECTION : Gérer le bonus de roses (uniquement tous les 30 tours)
         handleRoseBonus();
         
-        // NOUVEAU : Gérer le système de drop
         const dropWon = handleDropSystem();
         
         updateStats();
         
-        // Vérifier la victoire
         if (checkWin()) {
-          playSymbolSound(); // Son joué uniquement lors d'une victoire
+          playSymbolSound();
           await winGame();
-          break;
+          break; // Arrêter la boucle d'attaques si un jackpot est gagné
         } else {
-          // Vérifier s'il y a des symboles identiques (4 ou 5) - CORRECTION
           const matchingInfo = countMatchingSymbols();
           if (matchingInfo.count >= 4 && !dropWon) {
-            // CORRECTION : Utiliser le bon nombre de symboles dans le message
             message.textContent = `🎉 ${matchingInfo.count} symboles identiques ! 🎉`;
             playSymbolSound();
             
-            // Mettre en évidence les symboles correspondants
             highlightMatchingSymbols();
             
-            // CORRECTION : Ajouter à l'historique des gains pour les combinaisons partielles
             if (matchingInfo.count >= 4) {
               const partialGainAmount = calculatePartialGain(matchingInfo.count);
               
-              // Ajouter les roses au total et au jackpot
               rosesCount += partialGainAmount;
               jackpotAmount += partialGainAmount;
               
-              // Ajouter à l'historique des gains
               gainsHistory.push({
                 type: 'partial',
                 tours: currentGameAttempts,
@@ -2264,7 +2305,6 @@
                 date: new Date().toLocaleString('fr-FR')
               });
               
-              // Afficher le popup pour 4 ou 5 symboles
               showPartialWinPopup(matchingInfo.count, partialGainAmount);
               
               updateStats();
@@ -2272,7 +2312,6 @@
               updateGainsTable();
             }
             
-            // Attendre un peu pour que le joueur puisse voir les symboles dorés
             let delay;
             if (isUltraSpeedMode) delay = 200;
             else if (isSuperSpeedMode) delay = 300;
@@ -2281,7 +2320,6 @@
             
             await new Promise(resolve => setTimeout(resolve, delay));
             
-            // Supprimer les classes de victoire partielles pour le prochain tour
             removeWinClasses();
           }
         }
@@ -2302,7 +2340,6 @@
         const maxCount = matchingInfo.count;
         
         if (maxCount >= 4) {
-          // CORRECTION : Utiliser le bon nombre de symboles dans le message
           message.textContent = `Maximum ${maxCount} symboles identiques - Jackpot: ${jackpotAmount} roses`;
         } else {
           message.textContent = `Maximum ${maxCount} symboles identiques - Jackpot: ${jackpotAmount} roses`;
@@ -2313,11 +2350,11 @@
       spinBtn.disabled = false;
     }
 
-    // CORRECTION : Calculer le gain partiel pour 4 ou 5 symboles
+    // Calculer le gain partiel
     function calculatePartialGain(symbolCount) {
       switch(symbolCount) {
-        case 4: return 10; // 10 roses pour 4 symboles
-        case 5: return 50; // 50 roses pour 5 symboles
+        case 4: return 10;
+        case 5: return 50;
         default: return 0;
       }
     }
@@ -2328,7 +2365,6 @@
       const winningSymbol = symbolTypes[lastWinningSymbol];
       message.textContent = `🎉 JACKPOT ! Vous avez aligné ${currentDifficulty} ${winningSymbol.name}s ! 🎉`;
       
-      // Ajouter le gain à l'historique
       gainsHistory.push({
         type: 'jackpot',
         tours: currentGameAttempts,
@@ -2337,13 +2373,10 @@
         date: new Date().toLocaleString('fr-FR')
       });
       
-      // Ajouter les roses au total
       rosesCount += jackpotAmount;
       
-      // Sauvegarder immédiatement après la victoire (avec notification)
       saveGame(true);
       
-      // Mettre à jour le tableau des gains
       updateGainsTable();
       updateStats();
       
@@ -2382,14 +2415,69 @@
       spinBtn.textContent = `Tourner (${mode.toLocaleString()} tour${mode > 1 ? 's' : ''})`;
     }
 
+    // NOUVEAU : Fonction pour forcer un alignement (debug)
+    async function forceAlignment() {
+      if (isSpinning) {
+        message.textContent = "Veuillez attendre la fin du tour en cours.";
+        return;
+      }
+      
+      const symbolIndex = parseInt(debugSymbolSelect.value);
+      const count = parseInt(debugAlignCountSelect.value);
+      
+      // Définir les symboles manuellement
+      for (let i = 0; i < count; i++) {
+        symbols[i] = symbolIndex;
+      }
+      // Remplir le reste avec des symboles différents
+      for (let i = count; i < currentDifficulty; i++) {
+        symbols[i] = getDifferentRandomSymbol(symbolIndex);
+      }
+      
+      // Mettre à jour l'affichage
+      updateDisplay();
+      
+      if (count === 6) {
+        // Déclencher une victoire complète
+        lastWinningSymbol = symbolIndex;
+        await winGame();
+      } else if (count === 4 || count === 5) {
+        // Déclencher une victoire partielle
+        message.textContent = `🎉 ${count} symboles identiques (Forcé) ! 🎉`;
+        playSymbolSound();
+        highlightMatchingSymbols();
+        
+        const partialGainAmount = calculatePartialGain(count);
+        rosesCount += partialGainAmount;
+        jackpotAmount += partialGainAmount;
+        
+        gainsHistory.push({
+          type: 'partial',
+          tours: currentGameAttempts, // On peut mettre 0 ou le nb actuel
+          symbolCount: count,
+          roses: partialGainAmount,
+          date: new Date().toLocaleString('fr-FR')
+        });
+        
+        showPartialWinPopup(count, partialGainAmount);
+        
+        updateStats();
+        updateJackpotDisplay();
+        updateGainsTable();
+      }
+      
+      // Réinitialiser les classes après un court délai
+      setTimeout(removeWinClasses, 3000);
+    }
+
     // Événements
     spinBtn.addEventListener('click', spinAllSymbols);
     speedBtn.addEventListener('click', toggleSpeedMode);
     resetBtn.addEventListener('click', initGame);
     clearBtn.addEventListener('click', clearSave);
-    resetRewardsBtn.addEventListener('click', resetRewards); // NOUVEAU : Événement pour réinitialiser les récompenses
+    resetRewardsBtn.addEventListener('click', resetRewards);
 
-    // NOUVEAU : Événements pour les boutons supplémentaires
+    // Événements pour les boutons supplémentaires
     superSpeedBtn.addEventListener('click', toggleSuperSpeedMode);
     ultraSpeedBtn.addEventListener('click', toggleUltraSpeedMode);
     slowLightsBtn.addEventListener('click', () => setLightSpeed(5));
@@ -2397,6 +2485,9 @@
     increaseJackpotBtn.addEventListener('click', () => modifyJackpot(jackpotAmount + 100));
     decreaseJackpotBtn.addEventListener('click', () => modifyJackpot(Math.max(0, jackpotAmount - 100)));
     setJackpotBtn.addEventListener('click', setJackpotManually);
+    
+    // NOUVEAU : Événement pour le panneau de débogage
+    debugTriggerBtn.addEventListener('click', forceAlignment);
 
     document.getElementById("mode1").addEventListener("click", () => setAttackMode(1));
     document.getElementById("mode10").addEventListener("click", () => setAttackMode(10));
@@ -2408,6 +2499,9 @@
 
     // Raccourcis clavier
     document.addEventListener('keydown', (e) => {
+      // Éviter les raccourcis si on est en train de taper dans un champ (comme le prompt)
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      
       if (e.key === ' ' || e.key === 'Enter') {
         e.preventDefault();
         if (!isSpinning && !winAnimationActive) {
@@ -2434,22 +2528,36 @@
 
     // Initialisation au chargement
     window.addEventListener('load', () => {
-      // Essayer de charger une sauvegarde existante
       const hasLoadedSave = loadGame();
       
-      // Initialiser le jeu (avec les données chargées ou par défaut)
       symbols = Array(currentDifficulty).fill(0).map(() => getRandomSymbol());
       updateDisplay();
       updateStats();
       updateGainsTable();
       updateJackpotDisplay();
-      updateDropPoolDisplay(); // NOUVEAU : Mettre à jour l'affichage du pool
+      updateDropPoolDisplay();
       updateRemainingTurns();
       removeWinClasses();
       
       if (!hasLoadedSave) {
         message.textContent = `Bienvenue ! Alignez ${currentDifficulty} symboles identiques pour remporter le jackpot !`;
       }
+      
+      // NOUVEAU : Rendre les panneaux déplaçables
+      if (window.innerWidth > 768) { // Activer le glissement uniquement sur grand écran
+        makeDraggable(document.getElementById('speedControlsPanel'));
+        makeDraggable(document.getElementById('lightsControlsPanel'));
+        makeDraggable(document.getElementById('jackpotControlsPanel'));
+        makeDraggable(document.getElementById('debugPanel'));
+      }
+      
+      // NOUVEAU : Remplir le select du panneau de débogage
+      symbolTypes.forEach((symbol, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = symbol.name;
+        debugSymbolSelect.appendChild(option);
+      });
     });
   </script>
 </body>
